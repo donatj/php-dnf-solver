@@ -1,0 +1,38 @@
+{
+	"name": "donatj/php-dnf-solver",
+	"description": "PHP Cross Compatibility Solver",
+	"type": "library",
+	"keywords": [
+		"php",
+		"compatibility",
+		"dnf",
+		"dependency",
+		"solver"
+	],
+	"require": {
+		"php": "^8.1"
+	},
+	"require-dev": {
+		"donatj/drop": "^1.1",
+		"donatj/mddoc": "^0.5.0",
+		"phpunit/phpunit": "^9"
+	},
+	"license": "MIT",
+	"autoload": {
+		"psr-4": {
+			"donatj\\PhpDnfSolver\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"": "stubs/",
+			"Tests\\": "test/"
+		}
+	},
+	"authors": [
+		{
+			"name": "Jesse Donat",
+			"email": "donatj@gmail.com"
+		}
+	]
+}

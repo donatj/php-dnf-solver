@@ -1,0 +1,18 @@
+<mddoc>
+	<docpage target="README.md" autoloader="psr4" autoloader-root="src" autoloader-root-namespace="donatj\PhpDnfSolver">
+		<section title="PHP DNF Solver">
+			<badge-poser type="version"/>
+			<badge-poser type="license"/>
+
+			<text>WIP PHP DNF Solver - see: https://wiki.php.net/rfc/dnf_types</text>
+
+			<section title="Requirements">
+				<composer-requires/>
+			</section>
+			<section title="Installing">
+				<composer-install/>
+			</section>
+
+		</section>
+	</docpage>
+</mddoc>
