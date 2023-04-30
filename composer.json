@@ -1,6 +1,6 @@
 {
 	"name": "donatj/php-dnf-solver",
-	"description": "PHP Cross Compatibility Solver",
+	"description": "PHP DNF (Disjunctive Normal Form) Signature Compatibility Solver",
 	"type": "library",
 	"keywords": [
 		"php",
