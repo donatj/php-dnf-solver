@@ -26,7 +26,7 @@ class OrClause implements DnfTypeInterface {
 		}, $this->types));
 	}
 
-	public function matches( DnfTypeInterface $value ) : bool {
+	public function isSatisfiedBy( DnfTypeInterface $value ) : bool {
 		if( $value instanceof LiteralDnfTypeInterface ) {
 			$value = new OrClause($value);
 		}
@@ -34,7 +34,7 @@ class OrClause implements DnfTypeInterface {
 		foreach( $value->types as $valueType ) {
 			$matched = false;
 			foreach( $this->types as $type ) {
-				if( $type->matches($valueType) ) {
+				if( $type->isSatisfiedBy($valueType) ) {
 					$matched = true;
 				}
 			}

@@ -18,7 +18,7 @@ class BuiltInType implements LiteralDnfTypeInterface {
 		return $this->name;
 	}
 
-	public function matches( DnfTypeInterface $value ) : bool {
+	public function isSatisfiedBy( DnfTypeInterface $value ) : bool {
 		if( !$value instanceof LiteralDnfTypeInterface ) {
 			return false;
 		}
