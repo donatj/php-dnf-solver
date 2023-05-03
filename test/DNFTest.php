@@ -1,5 +1,6 @@
 <?php
 
+use donatj\PhpDnfSolver\DnfTypeInterface;
 use donatj\PhpDnfSolver\Types\AndClause;
 use donatj\PhpDnfSolver\Types\BuiltInType;
 use donatj\PhpDnfSolver\Types\OrClause;
@@ -14,8 +15,8 @@ class DNFTest extends TestCase {
 	/**
 	 * @dataProvider trueCaseProviders
 	 */
-	public function testDNF( $paramType, $returnType ) : void {
-		$match = $paramType->matches($returnType);
+	public function testDNF( DnfTypeInterface $paramType, DnfTypeInterface $returnType ) : void {
+		$match = $paramType->isSatisfiedBy($returnType);
 
 		$this->assertTrue($match, 'Assert that ' . $returnType->dnf() . ' fulfills ' . $paramType->dnf());
 	}
@@ -23,8 +24,8 @@ class DNFTest extends TestCase {
 	/**
 	 * @dataProvider falseCaseProviders
 	 */
-	public function testDNFFalse( $paramType, $returnType ) : void {
-		$match = $paramType->matches($returnType);
+	public function testDNFFalse( DnfTypeInterface $paramType, DnfTypeInterface $returnType ) : void {
+		$match = $paramType->isSatisfiedBy($returnType);
 
 		$this->assertFalse($match, 'Assert that ' . $returnType->dnf() . ' does not fulfill ' . $paramType->dnf());
 	}

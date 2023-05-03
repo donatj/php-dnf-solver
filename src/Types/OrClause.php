@@ -27,9 +27,9 @@ class OrClause implements DnfTypeInterface {
 	}
 
 	public function dnf() : string {
-		return implode('|', array_map(function( DnfTypeInterface $type ) {
-			return $type->count() > 1 ? "({$type->dnf()})" : $type->dnf();
-		}, $this->types));
+		return implode('|', array_map(
+				fn ( DnfTypeInterface $type ) => $type->count() > 1 ? "({$type->dnf()})" : $type->dnf(), $this->types)
+		);
 	}
 
 	public function isSatisfiedBy( DnfTypeInterface $value ) : bool {

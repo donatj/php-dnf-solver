@@ -9,4 +9,5 @@ class BarPerson extends Decorator implements BarPersonInterface {
 
 	use BazAwareTrait;
 	use FooAwareTrait;
+
 }

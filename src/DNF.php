@@ -26,7 +26,7 @@ class DNF {
 
 		if( $type instanceof \ReflectionIntersectionType ) {
 			$types = array_map(
-				fn( \ReflectionType $type ) => self::getFromReflectionType($type),
+				fn ( \ReflectionType $type ) => self::getFromReflectionType($type),
 				$type->getTypes()
 			);
 
@@ -35,7 +35,7 @@ class DNF {
 
 		if( $type instanceof \ReflectionUnionType ) {
 			$types = array_map(
-				fn( \ReflectionType $type ) => self::getFromReflectionType($type),
+				fn ( \ReflectionType $type ) => self::getFromReflectionType($type),
 				$type->getTypes()
 			);
 

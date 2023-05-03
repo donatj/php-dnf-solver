@@ -25,7 +25,7 @@ class AndClause implements DnfTypeInterface {
 			return $this->types[0]->dnf();
 		}
 
-		return implode('&', array_map(fn( DnfTypeInterface $type ) => $type->dnf(), $this->types));
+		return implode('&', array_map(fn ( DnfTypeInterface $type ) => $type->dnf(), $this->types));
 	}
 
 	public function isSatisfiedBy( DnfTypeInterface $value ) : bool {

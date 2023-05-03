@@ -45,14 +45,11 @@ class BuiltInType implements LiteralDnfTypeInterface {
 			return true;
 		}
 
-		if( $them === 'int' && ($me === 'float' || $me === 'string') ) {
-			return true;
-		}
-
-		return false;
+		return $them === 'int' && ($me === 'float' || $me === 'string');
 	}
 
 	public function count() : int {
 		return 1;
 	}
+
 }

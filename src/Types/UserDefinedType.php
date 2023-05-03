@@ -40,4 +40,5 @@ class UserDefinedType implements LiteralDnfTypeInterface {
 	public function count() : int {
 		return 1;
 	}
+
 }

@@ -2,8 +2,6 @@
 
 namespace Traits;
 
-use Closure;
-
 trait FooAwareTrait {
 
 	/** @var int[] */
