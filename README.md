@@ -140,6 +140,37 @@ Helper to convert a ReflectionType into it's DNF representation
 - ReflectionMethod::getReturnType()  
 - ReflectionProperty::getType()
 
+---
+
+#### Method: DNF::reflectionTypeSatisfiesReflectionType
+
+```php
+function reflectionTypeSatisfiesReflectionType(\ReflectionType $satisfyingType, \ReflectionType $satisfiedType) : bool
+```
+
+Helper to quickly check if a ReflectionType satisfies another ReflectionType
+
+---
+
+#### Method: DNF::getFromVarType
+
+```php
+function getFromVarType(\ReflectionParameter|\ReflectionProperty $parameter) : ?\donatj\PhpDnfSolver\DnfTypeInterface
+```
+
+Helper to quickly get a DNF representation of a (ReflectionParameter or ReflectionProperty)'s return type
+
+---
+
+#### Method: DNF::getFromReturnType
+
+```php
+function getFromReturnType(\ReflectionFunctionAbstract $func) : ?\donatj\PhpDnfSolver\DnfTypeInterface
+```
+
+Helper to quickly get a DNF representation of a ReflectionFunctionAbstract (ReflectionFunction /  
+ReflectionMethod)'s return type
+
 ### Class: \donatj\PhpDnfSolver\DnfTypeInterface
 
 #### Method: DnfTypeInterface->dnf
