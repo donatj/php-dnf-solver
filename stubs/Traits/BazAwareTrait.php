@@ -27,7 +27,7 @@ trait BazAwareTrait {
 	 * @return int[]
 	 */
 	public function getBazIds() : array {
-		if( !isset($this->bazIds) && $this->bazIdsCallable instanceof Closure ) {
+		if( !isset($this->bazIds) && $this->bazIdsCallable instanceof \Closure ) {
 			$this->bazIds = call_user_func($this->bazIdsCallable);
 		}
 

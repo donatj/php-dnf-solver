@@ -27,7 +27,7 @@ trait FooAwareTrait {
 	 * @return int[]
 	 */
 	public function getFooIds() : array {
-		if( !isset($this->adminIds) && $this->adminIdsCallable instanceof Closure ) {
+		if( !isset($this->adminIds) && $this->adminIdsCallable instanceof \Closure ) {
 			$this->adminIds = call_user_func($this->adminIdsCallable);
 		}
 

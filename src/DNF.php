@@ -3,15 +3,11 @@
 namespace donatj\PhpDnfSolver;
 
 use donatj\PhpDnfSolver\Exceptions\InvalidArgumentException;
-use ReflectionIntersectionType;
-use ReflectionNamedType;
-use ReflectionType;
-use ReflectionUnionType;
 
 class DNF {
 
-	public static function getFromReflectionType( ReflectionType $type ) : DnfTypeInterface {
-		if( $type instanceof ReflectionNamedType ) {
+	public static function getFromReflectionType( \ReflectionType $type ) : DnfTypeInterface {
+		if( $type instanceof \ReflectionNamedType ) {
 			if( $type->isBuiltin() ) {
 				return new Types\BuiltInType($type->getName());
 			}
@@ -19,18 +15,18 @@ class DNF {
 			return new Types\UserDefinedType($type->getName());
 		}
 
-		if( $type instanceof ReflectionIntersectionType ) {
+		if( $type instanceof \ReflectionIntersectionType ) {
 			$types = array_map(
-				fn( ReflectionType $type ) => self::getFromReflectionType($type),
+				fn( \ReflectionType $type ) => self::getFromReflectionType($type),
 				$type->getTypes()
 			);
 
 			return new Types\AndClause(...$types);
 		}
 
-		if( $type instanceof ReflectionUnionType ) {
+		if( $type instanceof \ReflectionUnionType ) {
 			$types = array_map(
-				fn( ReflectionType $type ) => self::getFromReflectionType($type),
+				fn( \ReflectionType $type ) => self::getFromReflectionType($type),
 				$type->getTypes()
 			);
 

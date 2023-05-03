@@ -10,7 +10,6 @@ abstract class Decorator implements PersonInterface {
 		$this->user = $user;
 	}
 
-
 	public function setId( ?int $id ) : void {
 		if( $this->user->getId() === null ) {
 			$this->user->setId($id);

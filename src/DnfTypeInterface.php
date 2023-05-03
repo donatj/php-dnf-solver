@@ -2,9 +2,7 @@
 
 namespace donatj\PhpDnfSolver;
 
-use Countable;
-
-interface DnfTypeInterface extends Countable {
+interface DnfTypeInterface extends \Countable {
 
 	public function dnf() : string;
 

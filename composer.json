@@ -15,7 +15,8 @@
 	"require-dev": {
 		"donatj/drop": "^1.1",
 		"donatj/mddoc": "^0.5.0",
-		"phpunit/phpunit": "^9"
+		"phpunit/phpunit": "^9",
+		"friendsofphp/php-cs-fixer": "^3.16"
 	},
 	"license": "MIT",
 	"autoload": {
