@@ -15,10 +15,18 @@
 				<composer-install/>
 			</section>
 
-			<section title="Example">
-				<source name="example/example.php" lang="php"/>
-				<text>Outputs:</text>
-				<exec cmd="php example/example.php" format="code-block"/>
+			<section title="Examples">
+				<section title="Example Parameter Satisfaction Check">
+					<source name="example/satisfaction.php" lang="php"/>
+					<text>Outputs:</text>
+					<exec cmd="php example/satisfaction.php" format="code-block"/>
+				</section>
+
+				<section title="Example DNF Building">
+					<source name="example/dnf-building.php" lang="php"/>
+					<text>Outputs:</text>
+					<exec cmd="php example/dnf-building.php" format="code-block"/>
+				</section>
 			</section>
 
 			<section title="Documentation">
