@@ -2,7 +2,7 @@
 
 namespace donatj\PhpDnfSolver;
 
-use InvalidArgumentException;
+use donatj\PhpDnfSolver\Exceptions\InvalidArgumentException;
 use ReflectionIntersectionType;
 use ReflectionNamedType;
 use ReflectionType;

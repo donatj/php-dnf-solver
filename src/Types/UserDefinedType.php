@@ -3,8 +3,8 @@
 namespace donatj\PhpDnfSolver\Types;
 
 use donatj\PhpDnfSolver\DnfTypeInterface;
+use donatj\PhpDnfSolver\Exceptions\InvalidArgumentException;
 use donatj\PhpDnfSolver\LiteralDnfTypeInterface;
-use InvalidArgumentException;
 
 class UserDefinedType implements LiteralDnfTypeInterface {
 
