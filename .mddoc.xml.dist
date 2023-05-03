@@ -21,6 +21,9 @@
 				<exec cmd="php example/example.php" format="code-block"/>
 			</section>
 
+			<section title="Documentation">
+				<recursive-directory name="src"/>
+			</section>
 		</section>
 	</docpage>
 </mddoc>

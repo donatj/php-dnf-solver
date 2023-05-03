@@ -5,11 +5,17 @@ namespace donatj\PhpDnfSolver\Types;
 use donatj\PhpDnfSolver\DnfTypeInterface;
 use donatj\PhpDnfSolver\LiteralDnfTypeInterface;
 
+/**
+ * Represents a "and clause" - a set of types which must all be satisfied - e.g. "A&B&C"
+ */
 class AndClause implements DnfTypeInterface {
 
 	/** @var LiteralDnfTypeInterface[] */
 	private array $types;
 
+	/**
+	 * @param \donatj\PhpDnfSolver\LiteralDnfTypeInterface ...$types The list of types to be satisfied
+	 */
 	public function __construct( LiteralDnfTypeInterface...$types ) {
 		$this->types = $types;
 	}

@@ -6,6 +6,15 @@ use donatj\PhpDnfSolver\Exceptions\InvalidArgumentException;
 
 class DNF {
 
+	/**
+	 * Helper to convert a ReflectionType into it's DNF representation
+	 *
+	 * Example sources include:
+	 * - ReflectionFunctionAbstract::getParameters()[…]->getType()
+	 * - ReflectionParameter::getType()
+	 * - ReflectionMethod::getReturnType()
+	 * - ReflectionProperty::getType()
+	 */
 	public static function getFromReflectionType( \ReflectionType $type ) : DnfTypeInterface {
 		if( $type instanceof \ReflectionNamedType ) {
 			if( $type->isBuiltin() ) {

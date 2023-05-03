@@ -65,3 +65,339 @@ bool(true)
 bool(true)
 bool(false)
 ```
+
+## Documentation
+
+### Class: \donatj\PhpDnfSolver\DNF
+
+#### Method: DNF::getFromReflectionType
+
+```php
+function getFromReflectionType(\ReflectionType $type) : \donatj\PhpDnfSolver\DnfTypeInterface
+```
+
+Helper to convert a ReflectionType into it's DNF representation  
+
+##### Example sources include
+
+- ReflectionFunctionAbstract::getParameters()[…]->getType()  
+- ReflectionParameter::getType()  
+- ReflectionMethod::getReturnType()  
+- ReflectionProperty::getType()
+
+### Class: \donatj\PhpDnfSolver\DnfTypeInterface
+
+#### Method: DnfTypeInterface->dnf
+
+```php
+function dnf() : string
+```
+
+Return the canonical string representation of the DNF representation of this type
+
+---
+
+#### Method: DnfTypeInterface->isSatisfiedBy
+
+```php
+function isSatisfiedBy(\donatj\PhpDnfSolver\DnfTypeInterface $value) : bool
+```
+
+Tests if this type is satisfied by the given type  
+  
+For example, if this type is "A|(B&C)" and the given type matches just "A", this method returns true.  
+If the given type matches just "B", this method returns false.  
+If the given type matches "B&C", this method returns true.
+
+---
+
+#### Method: DnfTypeInterface->count
+
+```php
+function count() : int
+```
+
+Returns the number of types in this DNF type
+
+### Class: \donatj\PhpDnfSolver\Exceptions\InvalidArgumentException
+
+### Class: \donatj\PhpDnfSolver\LiteralDnfTypeInterface
+
+#### Method: LiteralDnfTypeInterface->getTypeName
+
+```php
+function getTypeName() : string
+```
+
+Returns the fully qualified type name of this literal
+
+---
+
+#### Method: LiteralDnfTypeInterface->count
+
+```php
+function count() : int
+```
+
+Returns the number of types in this DNF type - always 1 for a literal
+
+Returns the number of types in this DNF type
+
+---
+
+#### Method: LiteralDnfTypeInterface->dnf
+
+```php
+function dnf() : string
+```
+
+Return the canonical string representation of the DNF representation of this type
+
+---
+
+#### Method: LiteralDnfTypeInterface->isSatisfiedBy
+
+```php
+function isSatisfiedBy(\donatj\PhpDnfSolver\DnfTypeInterface $value) : bool
+```
+
+Tests if this type is satisfied by the given type  
+  
+For example, if this type is "A|(B&C)" and the given type matches just "A", this method returns true.  
+If the given type matches just "B", this method returns false.  
+If the given type matches "B&C", this method returns true.
+
+### Class: \donatj\PhpDnfSolver\Types\AndClause
+
+Represents a "and clause" - a set of types which must all be satisfied - e.g. "A&B&C"
+
+#### Method: AndClause->__construct
+
+```php
+function __construct(\donatj\PhpDnfSolver\LiteralDnfTypeInterface ...$types)
+```
+
+##### Parameters:
+
+- ***\donatj\PhpDnfSolver\LiteralDnfTypeInterface*** `$types` - The list of types to be satisfied
+
+---
+
+#### Method: AndClause->dnf
+
+```php
+function dnf() : string
+```
+
+Return the canonical string representation of the DNF representation of this type
+
+---
+
+#### Method: AndClause->isSatisfiedBy
+
+```php
+function isSatisfiedBy(\donatj\PhpDnfSolver\DnfTypeInterface $value) : bool
+```
+
+Tests if this type is satisfied by the given type  
+  
+For example, if this type is "A|(B&C)" and the given type matches just "A", this method returns true.  
+If the given type matches just "B", this method returns false.  
+If the given type matches "B&C", this method returns true.
+
+---
+
+#### Method: AndClause->count
+
+```php
+function count() : int
+```
+
+Returns the number of types in this DNF type
+
+### Class: \donatj\PhpDnfSolver\Types\BuiltInType
+
+Represents a "built in type" as defined by ReflectionNamedType::isBuiltin()
+
+This includes:
+- int
+- float
+- string
+- bool
+- array
+- iterable
+
+#### Method: BuiltInType->__construct
+
+```php
+function __construct(string $name)
+```
+
+##### Parameters:
+
+- ***string*** `$name` - The name of the built-in type
+
+---
+
+#### Method: BuiltInType->dnf
+
+```php
+function dnf() : string
+```
+
+Return the canonical string representation of the DNF representation of this type
+
+---
+
+#### Method: BuiltInType->getTypeName
+
+```php
+function getTypeName() : string
+```
+
+Returns the fully qualified type name of this literal
+
+---
+
+#### Method: BuiltInType->isSatisfiedBy
+
+```php
+function isSatisfiedBy(\donatj\PhpDnfSolver\DnfTypeInterface $value) : bool
+```
+
+Tests if this type is satisfied by the given type  
+  
+For example, if this type is "A|(B&C)" and the given type matches just "A", this method returns true.  
+If the given type matches just "B", this method returns false.  
+If the given type matches "B&C", this method returns true.
+
+---
+
+#### Method: BuiltInType->count
+
+```php
+function count() : int
+```
+
+Returns the number of types in this DNF type - always 1 for a literal
+
+Returns the number of types in this DNF type
+
+### Class: \donatj\PhpDnfSolver\Types\OrClause
+
+Represents a "or" clause - a set of types where any one of them must be satisfied - e.g. "A|B|(C&D)"
+
+#### Method: OrClause->__construct
+
+```php
+function __construct(\donatj\PhpDnfSolver\Types\AndClause|\donatj\PhpDnfSolver\LiteralDnfTypeInterface ...$types)
+```
+
+##### Parameters:
+
+- ***\donatj\PhpDnfSolver\Types\AndClause*** | ***\donatj\PhpDnfSolver\LiteralDnfTypeInterface*** `$types` - The list of types to be satisfied. Does not accept an OrClause as DNF defines that as invalid.
+
+---
+
+#### Method: OrClause->dnf
+
+```php
+function dnf() : string
+```
+
+Return the canonical string representation of the DNF representation of this type
+
+---
+
+#### Method: OrClause->isSatisfiedBy
+
+```php
+function isSatisfiedBy(\donatj\PhpDnfSolver\DnfTypeInterface $value) : bool
+```
+
+Tests if this type is satisfied by the given type  
+  
+For example, if this type is "A|(B&C)" and the given type matches just "A", this method returns true.  
+If the given type matches just "B", this method returns false.  
+If the given type matches "B&C", this method returns true.
+
+---
+
+#### Method: OrClause->count
+
+```php
+function count() : int
+```
+
+Returns the number of types in this DNF type
+
+### Class: \donatj\PhpDnfSolver\Types\UserDefinedType
+
+Represents a "user defined type" - a class, interface, or trait, etc.
+
+```php
+<?php
+namespace donatj\PhpDnfSolver\Types;
+
+class UserDefinedType {
+	public $className;
+}
+```
+
+#### Method: UserDefinedType->__construct
+
+```php
+function __construct(string $className)
+```
+
+##### Parameters:
+
+- ***string*** `$className` - The name of the class, interface, or trait to be satisfied
+
+**Throws**: `\donatj\PhpDnfSolver\Exceptions\InvalidArgumentException` - if the class does not exist after triggering the register autoloaders
+
+---
+
+#### Method: UserDefinedType->dnf
+
+```php
+function dnf() : string
+```
+
+Return the canonical string representation of the DNF representation of this type
+
+---
+
+#### Method: UserDefinedType->getTypeName
+
+```php
+function getTypeName() : string
+```
+
+Returns the fully qualified type name of this literal
+
+---
+
+#### Method: UserDefinedType->isSatisfiedBy
+
+```php
+function isSatisfiedBy(\donatj\PhpDnfSolver\DnfTypeInterface $value) : bool
+```
+
+Tests if this type is satisfied by the given type  
+  
+For example, if this type is "A|(B&C)" and the given type matches just "A", this method returns true.  
+If the given type matches just "B", this method returns false.  
+If the given type matches "B&C", this method returns true.
+
+---
+
+#### Method: UserDefinedType->count
+
+```php
+function count() : int
+```
+
+Returns the number of types in this DNF type - always 1 for a literal
+
+Returns the number of types in this DNF type

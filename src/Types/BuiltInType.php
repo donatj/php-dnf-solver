@@ -5,8 +5,24 @@ namespace donatj\PhpDnfSolver\Types;
 use donatj\PhpDnfSolver\DnfTypeInterface;
 use donatj\PhpDnfSolver\LiteralDnfTypeInterface;
 
+/**
+ * Represents a "built in type" as defined by ReflectionNamedType::isBuiltin()
+ *
+ * This includes:
+ * - int
+ * - float
+ * - string
+ * - bool
+ * - array
+ * - iterable
+ *
+ * @see https://www.php.net/manual/en/reflectionnamedtype.isbuiltin.php
+ */
 class BuiltInType implements LiteralDnfTypeInterface {
 
+	/**
+	 * @param string $name The name of the built-in type
+	 */
 	public function __construct( private readonly string $name ) {
 	}
 
