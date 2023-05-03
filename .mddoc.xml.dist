@@ -3,14 +3,22 @@
 		<section title="PHP DNF Solver">
 			<badge-poser type="version"/>
 			<badge-poser type="license"/>
+			<badge-github-action name="donatj/php-dnf-solver" workflow-file="ci.yml"/>
 
-			<text>WIP PHP DNF Solver - see: https://wiki.php.net/rfc/dnf_types</text>
+			<text>PHP DNF (Disjunctive Normal Form) Signature Compatibility Solver - see: https://wiki.php.net/rfc/dnf_types</text>
 
 			<section title="Requirements">
 				<composer-requires/>
 			</section>
+
 			<section title="Installing">
 				<composer-install/>
+			</section>
+
+			<section title="Example">
+				<source name="example/example.php" lang="php"/>
+				<text>Outputs:</text>
+				<exec cmd="php example/example.php" format="code-block"/>
 			</section>
 
 		</section>
