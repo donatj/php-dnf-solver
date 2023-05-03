@@ -11,4 +11,4 @@ fix:
 
 .PHONY: README.md
 README.md:
-	vendor/bin/mddoc
+	XDEBUG_MODE=off php -d error_reporting=24575 ./vendor/bin/mddoc
