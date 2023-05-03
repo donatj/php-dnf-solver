@@ -2,11 +2,15 @@
 
 namespace donatj\PhpDnfSolver\Types;
 
+use donatj\PhpDnfSolver\DnfTypeInterface;
+use donatj\PhpDnfSolver\LiteralDnfTypeInterface;
+use InvalidArgumentException;
+
 class UserDefinedType implements LiteralDnfTypeInterface {
 
 	public function __construct( public string $className ) {
 		if( !class_exists($className) && !interface_exists($className) && !trait_exists($className) ) {
-			throw new \InvalidArgumentException("'{$className}' does not exist");
+			throw new InvalidArgumentException("'{$className}' does not exist");
 		}
 	}
 
@@ -18,7 +22,11 @@ class UserDefinedType implements LiteralDnfTypeInterface {
 		return $this->className;
 	}
 
-	public function matches( LiteralDnfTypeInterface $value ) : bool {
+	public function matches( DnfTypeInterface $value ) : bool {
+		if( !$value instanceof LiteralDnfTypeInterface ) {
+			return false;
+		}
+
 		return is_a($value->getTypeName(), $this->className, true);
 	}
 

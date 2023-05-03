@@ -2,6 +2,9 @@
 
 namespace donatj\PhpDnfSolver\Types;
 
+use donatj\PhpDnfSolver\DnfTypeInterface;
+use donatj\PhpDnfSolver\LiteralDnfTypeInterface;
+
 class AndClause implements DnfTypeInterface {
 
 	/** @var LiteralDnfTypeInterface[] */
@@ -19,8 +22,8 @@ class AndClause implements DnfTypeInterface {
 		return implode('&', array_map(fn( DnfTypeInterface $type ) => $type->dnf(), $this->types));
 	}
 
-	public function matches( LiteralDnfTypeInterface|AndClause $value ) : bool {
-		if( !$value instanceof AndClause ) {
+	public function matches( DnfTypeInterface $value ) : bool {
+		if( $value instanceof LiteralDnfTypeInterface ) {
 			$value = new AndClause($value);
 		}
 

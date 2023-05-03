@@ -2,6 +2,9 @@
 
 namespace donatj\PhpDnfSolver\Types;
 
+use donatj\PhpDnfSolver\DnfTypeInterface;
+use donatj\PhpDnfSolver\LiteralDnfTypeInterface;
+
 class BuiltInType implements LiteralDnfTypeInterface {
 
 	public function __construct( private readonly string $name ) {
@@ -15,14 +18,18 @@ class BuiltInType implements LiteralDnfTypeInterface {
 		return $this->name;
 	}
 
-	public function matches( LiteralDnfTypeInterface $value ) : bool {
+	public function matches( DnfTypeInterface $value ) : bool {
+		if( !$value instanceof LiteralDnfTypeInterface ) {
+			return false;
+		}
+
 		$them = strtolower($value->getTypeName());
 		$me   = strtolower($this->name);
-		if($them === $me) {
+		if( $them === $me ) {
 			return true;
 		}
 
-		if($them === 'int' && ($me === 'float' || $me === 'string')) {
+		if( $them === 'int' && ($me === 'float' || $me === 'string') ) {
 			return true;
 		}
 

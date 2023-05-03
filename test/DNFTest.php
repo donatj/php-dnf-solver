@@ -90,6 +90,27 @@ class DNFTest extends TestCase {
 		];
 
 		yield [
+			new UserDefinedType(BarPersonInterface::class),
+			new BuiltInType('float'),
+		];
+
+		yield [
+			new OrClause(
+				new UserDefinedType(BazAwareInterface::class),
+				new UserDefinedType(BazAwareInterface::class)
+			),
+			new BuiltInType('float'),
+		];
+
+		yield [
+			new BuiltInType('float'),
+			new OrClause(
+				new UserDefinedType(BazAwareInterface::class),
+				new UserDefinedType(BazAwareInterface::class)
+			),
+		];
+
+		yield [
 			new OrClause(
 				new AndClause(
 					new UserDefinedType(BazAwareInterface::class),

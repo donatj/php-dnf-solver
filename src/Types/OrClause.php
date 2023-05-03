@@ -2,6 +2,9 @@
 
 namespace donatj\PhpDnfSolver\Types;
 
+use donatj\PhpDnfSolver\DnfTypeInterface;
+use donatj\PhpDnfSolver\LiteralDnfTypeInterface;
+
 class OrClause implements DnfTypeInterface {
 
 	/** @var AndClause[] */
@@ -23,8 +26,8 @@ class OrClause implements DnfTypeInterface {
 		}, $this->types));
 	}
 
-	public function matches( LiteralDnfTypeInterface|AndClause|OrClause $value ) : bool {
-		if( !$value instanceof OrClause ) {
+	public function matches( DnfTypeInterface $value ) : bool {
+		if( $value instanceof LiteralDnfTypeInterface ) {
 			$value = new OrClause($value);
 		}
 
