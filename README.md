@@ -150,6 +150,11 @@ function reflectionTypeSatisfiesReflectionType(\ReflectionType $satisfyingType, 
 
 Helper to quickly check if a ReflectionType satisfies another ReflectionType
 
+##### Parameters:
+
+- ***\ReflectionType*** `$satisfyingType` - The type which must be satisfied (e.g. a parameter type)
+- ***\ReflectionType*** `$satisfiedType` - The type which must satisfy the other (e.g. a return type)
+
 ---
 
 #### Method: DNF::getFromVarType

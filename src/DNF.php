@@ -42,11 +42,14 @@ class DNF {
 			return new Types\OrClause(...$types);
 		}
 
-		throw new InvalidArgumentException('Unknown ReflectionType');
+		throw new InvalidArgumentException('Unknown ReflectionType ' . get_class($type));
 	}
 
 	/**
 	 * Helper to quickly check if a ReflectionType satisfies another ReflectionType
+	 *
+	 * @param \ReflectionType $satisfyingType The type which must be satisfied (e.g. a parameter type)
+	 * @param \ReflectionType $satisfiedType  The type which must satisfy the other (e.g. a return type)
 	 */
 	public static function reflectionTypeSatisfiesReflectionType(
 		\ReflectionType $satisfyingType,
