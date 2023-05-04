@@ -171,87 +171,7 @@ function getFromReturnType(\ReflectionFunctionAbstract $func) : ?\donatj\PhpDnfS
 Helper to quickly get a DNF representation of a ReflectionFunctionAbstract (ReflectionFunction /  
 ReflectionMethod)'s return type
 
-### Class: \donatj\PhpDnfSolver\DnfTypeInterface
-
-#### Method: DnfTypeInterface->dnf
-
-```php
-function dnf() : string
-```
-
-Return the canonical string representation of the DNF representation of this type
-
----
-
-#### Method: DnfTypeInterface->isSatisfiedBy
-
-```php
-function isSatisfiedBy(\donatj\PhpDnfSolver\DnfTypeInterface $value) : bool
-```
-
-Tests if this type is satisfied by the given type  
-  
-For example, if this type is "A|(B&C)" and the given type matches just "A", this method returns true.  
-If the given type matches just "B", this method returns false.  
-If the given type matches "B&C", this method returns true.
-
----
-
-#### Method: DnfTypeInterface->count
-
-```php
-function count() : int
-```
-
-Returns the number of types in this DNF type
-
 ### Class: \donatj\PhpDnfSolver\Exceptions\InvalidArgumentException
-
-### Class: \donatj\PhpDnfSolver\LiteralDnfTypeInterface
-
-#### Method: LiteralDnfTypeInterface->getTypeName
-
-```php
-function getTypeName() : string
-```
-
-Returns the fully qualified type name of this literal
-
----
-
-#### Method: LiteralDnfTypeInterface->count
-
-```php
-function count() : int
-```
-
-Always 1 for literal types
-
-Returns the number of types in this DNF type
-
----
-
-#### Method: LiteralDnfTypeInterface->dnf
-
-```php
-function dnf() : string
-```
-
-Return the canonical string representation of the DNF representation of this type
-
----
-
-#### Method: LiteralDnfTypeInterface->isSatisfiedBy
-
-```php
-function isSatisfiedBy(\donatj\PhpDnfSolver\DnfTypeInterface $value) : bool
-```
-
-Tests if this type is satisfied by the given type  
-  
-For example, if this type is "A|(B&C)" and the given type matches just "A", this method returns true.  
-If the given type matches just "B", this method returns false.  
-If the given type matches "B&C", this method returns true.
 
 ### Class: \donatj\PhpDnfSolver\Types\AndClause
 
@@ -300,6 +220,18 @@ function count() : int
 ```
 
 Returns the number of types in this DNF type
+
+---
+
+#### Method: AndClause->getTypes
+
+```php
+function getTypes() : array
+```
+
+##### Returns:
+
+- ***\donatj\PhpDnfSolver\LiteralDnfTypeInterface[]***
 
 ### Class: \donatj\PhpDnfSolver\Types\BuiltInType
 
@@ -417,6 +349,18 @@ function count() : int
 
 Returns the number of types in this DNF type
 
+---
+
+#### Method: OrClause->getTypes
+
+```php
+function getTypes() : array
+```
+
+##### Returns:
+
+- ***\donatj\PhpDnfSolver\Types\AndClause[]***
+
 ### Class: \donatj\PhpDnfSolver\Types\UserDefinedType
 
 Represents a "user defined type" - a class, interface, or trait, etc.
@@ -440,7 +384,7 @@ function __construct(string $className)
 
 - ***string*** `$className` - The name of the class, interface, or trait to be satisfied
 
-**Throws**: `\donatj\PhpDnfSolver\Exceptions\InvalidArgumentException` - if the class does not exist after triggering the register autoloaders
+**Throws**: `\donatj\PhpDnfSolver\Exceptions\InvalidArgumentException` - if the user defined type does not exist after triggering registered autoloaders
 
 ---
 

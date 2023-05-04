@@ -30,7 +30,7 @@
 			</section>
 
 			<section title="Documentation">
-				<recursive-directory name="src"/>
+				<recursive-directory name="src" file-filter="/^((?!Interface|Trait).)*$/" />
 			</section>
 		</section>
 	</docpage>
