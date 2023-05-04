@@ -10,7 +10,7 @@ interface LiteralDnfTypeInterface extends DnfTypeInterface {
 	public function getTypeName() : string;
 
 	/**
-	 * Returns the number of types in this DNF type - always 1 for a literal
+	 * Always 1 for literal types
 	 */
 	public function count() : int;
 

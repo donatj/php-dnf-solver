@@ -225,7 +225,7 @@ Returns the fully qualified type name of this literal
 function count() : int
 ```
 
-Returns the number of types in this DNF type - always 1 for a literal
+Always 1 for literal types
 
 Returns the number of types in this DNF type
 
@@ -365,7 +365,7 @@ If the given type matches "B&C", this method returns true.
 function count() : int
 ```
 
-Returns the number of types in this DNF type - always 1 for a literal
+Always 1 for literal types
 
 Returns the number of types in this DNF type
 
@@ -484,6 +484,6 @@ If the given type matches "B&C", this method returns true.
 function count() : int
 ```
 
-Returns the number of types in this DNF type - always 1 for a literal
+Always 1 for literal types
 
 Returns the number of types in this DNF type
