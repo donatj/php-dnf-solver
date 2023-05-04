@@ -98,6 +98,16 @@ class IntegrationTest extends TestCase {
 		];
 
 		yield [
+			new BuiltInType('float'),
+			new OrClause(new BuiltInType('int'), new BuiltInType('string')),
+		];
+
+		yield [
+			new BuiltInType('float'),
+			new OrClause(new BuiltInType('float')),
+		];
+
+		yield [
 			new OrClause(
 				new UserDefinedType(BazAwareInterface::class),
 				new UserDefinedType(BazAwareInterface::class)
