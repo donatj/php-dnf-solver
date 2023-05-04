@@ -43,10 +43,6 @@ class BuiltInType implements LiteralDnfTypeInterface {
 			return false;
 		}
 
-		if( !$value instanceof LiteralDnfTypeInterface ) {
-			return false;
-		}
-
 		$them = strtolower($value->getTypeName());
 		$me   = strtolower($this->name);
 		if( $them === $me ) {

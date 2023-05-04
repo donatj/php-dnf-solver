@@ -22,11 +22,9 @@ class AndClause implements NestedDnfTypeInterface {
 	}
 
 	public function dnf() : string {
-		if( count($this->types) === 1 ) {
-			return $this->types[0]->dnf();
-		}
-
-		return implode('&', array_map(fn ( DnfTypeInterface $type ) => $type->dnf(), $this->types));
+		return implode('&', array_map(
+			fn ( DnfTypeInterface $type ) => $type->dnf(), $this->types)
+		);
 	}
 
 	public function isSatisfiedBy( DnfTypeInterface $value ) : bool {
@@ -34,8 +32,8 @@ class AndClause implements NestedDnfTypeInterface {
 			$value = new AndClause($value);
 		}
 
-		foreach( $this->types as $type ) {
-			foreach( $value->types as $valueType ) {
+		foreach( $this->getTypes() as $type ) {
+			foreach( $value->getTypes() as $valueType ) {
 				if( $type->isSatisfiedBy($valueType) ) {
 					continue 2;
 				}
