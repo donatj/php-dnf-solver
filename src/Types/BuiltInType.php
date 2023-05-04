@@ -4,7 +4,7 @@ namespace donatj\PhpDnfSolver\Types;
 
 use donatj\PhpDnfSolver\DnfTypeInterface;
 use donatj\PhpDnfSolver\LiteralDnfTypeInterface;
-use donatj\PhpDnfSolver\Traits\UnnestTrait;
+use donatj\PhpDnfSolver\Traits\UnwrapTrait;
 
 /**
  * Represents a "built in type" as defined by ReflectionNamedType::isBuiltin()
@@ -21,7 +21,7 @@ use donatj\PhpDnfSolver\Traits\UnnestTrait;
  */
 class BuiltInType implements LiteralDnfTypeInterface {
 
-	use UnnestTrait;
+	use UnwrapTrait;
 
 	/**
 	 * @param string $name The name of the built-in type
@@ -38,7 +38,7 @@ class BuiltInType implements LiteralDnfTypeInterface {
 	}
 
 	public function isSatisfiedBy( DnfTypeInterface $value ) : bool {
-		$value = $this->unnest($value);
+		$value = $this->unwrap($value);
 		if( !$value ) {
 			return false;
 		}

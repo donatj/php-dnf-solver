@@ -5,14 +5,14 @@ namespace donatj\PhpDnfSolver\Types;
 use donatj\PhpDnfSolver\DnfTypeInterface;
 use donatj\PhpDnfSolver\Exceptions\InvalidArgumentException;
 use donatj\PhpDnfSolver\LiteralDnfTypeInterface;
-use donatj\PhpDnfSolver\Traits\UnnestTrait;
+use donatj\PhpDnfSolver\Traits\UnwrapTrait;
 
 /**
  * Represents a "user defined type" - a class, interface, or trait, etc.
  */
 class UserDefinedType implements LiteralDnfTypeInterface {
 
-	use UnnestTrait;
+	use UnwrapTrait;
 
 	/**
 	 * @param string $className The name of the class, interface, or trait to be satisfied
@@ -33,7 +33,7 @@ class UserDefinedType implements LiteralDnfTypeInterface {
 	}
 
 	public function isSatisfiedBy( DnfTypeInterface $value ) : bool {
-		$value = $this->unnest($value);
+		$value = $this->unwrap($value);
 		if( !$value ) {
 			return false;
 		}

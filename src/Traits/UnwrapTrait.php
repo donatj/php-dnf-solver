@@ -6,12 +6,12 @@ use donatj\PhpDnfSolver\DnfTypeInterface;
 use donatj\PhpDnfSolver\LiteralDnfTypeInterface;
 use donatj\PhpDnfSolver\NestedDnfTypeInterface;
 
-trait UnnestTrait {
+trait UnwrapTrait {
 
 	/**
 	 * Un-nests a singular literal DNF type to a literal, or null if it cannot be unnested
 	 */
-	private function unnest(DnfTypeInterface $value) : ?LiteralDnfTypeInterface {
+	private function unwrap(DnfTypeInterface $value) : ?LiteralDnfTypeInterface {
 		if ( $value instanceof LiteralDnfTypeInterface ) {
 			return $value;
 		}
