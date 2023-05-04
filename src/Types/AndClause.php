@@ -4,11 +4,12 @@ namespace donatj\PhpDnfSolver\Types;
 
 use donatj\PhpDnfSolver\DnfTypeInterface;
 use donatj\PhpDnfSolver\LiteralDnfTypeInterface;
+use donatj\PhpDnfSolver\NestedDnfTypeInterface;
 
 /**
  * Represents a "and clause" - a set of types which must all be satisfied - e.g. "A&B&C"
  */
-class AndClause implements DnfTypeInterface {
+class AndClause implements NestedDnfTypeInterface {
 
 	/** @var LiteralDnfTypeInterface[] */
 	private array $types;
@@ -48,6 +49,13 @@ class AndClause implements DnfTypeInterface {
 
 	public function count() : int {
 		return count($this->types);
+	}
+
+	/**
+	 * @return \donatj\PhpDnfSolver\LiteralDnfTypeInterface[]
+	 */
+	public function getTypes() : array {
+		return $this->types;
 	}
 
 }

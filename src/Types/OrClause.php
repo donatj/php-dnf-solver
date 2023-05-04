@@ -4,11 +4,12 @@ namespace donatj\PhpDnfSolver\Types;
 
 use donatj\PhpDnfSolver\DnfTypeInterface;
 use donatj\PhpDnfSolver\LiteralDnfTypeInterface;
+use donatj\PhpDnfSolver\NestedDnfTypeInterface;
 
 /**
  * Represents a "or" clause - a set of types where any one of them must be satisfied - e.g. "A|B|(C&D)"
  */
-class OrClause implements DnfTypeInterface {
+class OrClause implements NestedDnfTypeInterface {
 
 	/** @var AndClause[] */
 	private array $types;
@@ -55,6 +56,13 @@ class OrClause implements DnfTypeInterface {
 
 	public function count() : int {
 		return count($this->types);
+	}
+
+	/**
+	 * @return \donatj\PhpDnfSolver\Types\AndClause[]
+	 */
+	public function getTypes() : array {
+		return $this->types;
 	}
 
 }

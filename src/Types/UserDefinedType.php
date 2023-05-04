@@ -5,15 +5,18 @@ namespace donatj\PhpDnfSolver\Types;
 use donatj\PhpDnfSolver\DnfTypeInterface;
 use donatj\PhpDnfSolver\Exceptions\InvalidArgumentException;
 use donatj\PhpDnfSolver\LiteralDnfTypeInterface;
+use donatj\PhpDnfSolver\Traits\UnnestTrait;
 
 /**
  * Represents a "user defined type" - a class, interface, or trait, etc.
  */
 class UserDefinedType implements LiteralDnfTypeInterface {
 
+	use UnnestTrait;
+
 	/**
 	 * @param string $className The name of the class, interface, or trait to be satisfied
-	 * @throws \donatj\PhpDnfSolver\Exceptions\InvalidArgumentException if the class does not exist after triggering the register autoloaders
+	 * @throws \donatj\PhpDnfSolver\Exceptions\InvalidArgumentException if the user defined type does not exist after triggering registered autoloaders
 	 */
 	public function __construct( public string $className ) {
 		if( !class_exists($className) && !interface_exists($className) && !trait_exists($className) ) {
@@ -30,7 +33,8 @@ class UserDefinedType implements LiteralDnfTypeInterface {
 	}
 
 	public function isSatisfiedBy( DnfTypeInterface $value ) : bool {
-		if( !$value instanceof LiteralDnfTypeInterface ) {
+		$value = $this->unnest($value);
+		if( !$value ) {
 			return false;
 		}
 
