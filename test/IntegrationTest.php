@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 use donatj\PhpDnfSolver\DnfTypeInterface;
 use donatj\PhpDnfSolver\Types\AndClause;
 use donatj\PhpDnfSolver\Types\BuiltInType;
@@ -10,7 +12,7 @@ use Interfaces\FooAwareInterface;
 use Objects\Person\BarPersonInterface;
 use PHPUnit\Framework\TestCase;
 
-class DNFTest extends TestCase {
+class IntegrationTest extends TestCase {
 
 	/**
 	 * @dataProvider trueCaseProviders
