@@ -2,7 +2,7 @@
 test:
 	vendor/bin/phpcs
 	vendor/bin/php-cs-fixer fix --dry-run
-	vendor/bin/phpunit --coverage-text
+	XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text
 
 .PHONY: fix
 fix:
