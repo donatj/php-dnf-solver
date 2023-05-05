@@ -20,6 +20,9 @@ class DNF {
 		if( $type instanceof \ReflectionNamedType ) {
 			if( $type->isBuiltin() ) {
 				$dnfType = new Types\BuiltInType($type->getName());
+				if( $type->getName() === 'mixed' ) {
+					return $dnfType;
+				}
 			} else {
 				$dnfType = new Types\UserDefinedType($type->getName());
 			}
@@ -49,7 +52,7 @@ class DNF {
 			return new Types\OrClause(...$types);
 		}
 
-		throw new InvalidArgumentException('Unknown ReflectionType ' . get_class($type));
+		throw new InvalidArgumentException('Unknown ReflectionType: ' . get_class($type));
 	}
 
 	/**

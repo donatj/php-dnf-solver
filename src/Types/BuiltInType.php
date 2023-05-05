@@ -38,6 +38,10 @@ class BuiltInType implements SingularDnfTypeInterface {
 	}
 
 	public function isSatisfiedBy( DnfTypeInterface $value ) : bool {
+		if($this->name === 'mixed') {
+			return true;
+		}
+
 		$value = $this->unwrap($value);
 		if( !$value ) {
 			return false;

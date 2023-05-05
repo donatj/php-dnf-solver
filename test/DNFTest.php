@@ -75,6 +75,14 @@ class DNFTest extends TestCase {
 		$this->assertSame('Interfaces\FooAwareInterface&Interfaces\BazAwareInterface', $dnf->dnf());
 	}
 
+	private function firstParamType( callable $reflection ) : \ReflectionType {
+		return (new \ReflectionFunction($reflection))->getParameters()[0]->getType();
+	}
+
+	private function returnType( callable $reflection ) : \ReflectionType {
+		return (new \ReflectionFunction($reflection))->getReturnType();
+	}
+
 	/**
 	 * @dataProvider trueSatisfactionProvider
 	 */
@@ -86,26 +94,6 @@ class DNFTest extends TestCase {
 			$satisfyingType,
 			$satisfiedType
 		));
-	}
-
-	private function firstParamType( callable $reflection ) : \ReflectionType {
-		return (new \ReflectionFunction($reflection))->getParameters()[0]->getType();
-	}
-
-	private function returnType( callable $reflection ) : \ReflectionType {
-		return (new \ReflectionFunction($reflection))->getReturnType();
-	}
-
-	public function trueSatisfactionProvider() : \Generator {
-		yield [
-			$this->firstParamType(function ( FooAwareInterface $foo ) { }),
-			$this->returnType(function () : FooAwareInterface { }),
-		];
-
-		yield [
-			$this->firstParamType(function ( float $foo ) { }),
-			$this->returnType(fn () : float => 8.0),
-		];
 	}
 
 	/**
@@ -121,6 +109,28 @@ class DNFTest extends TestCase {
 		));
 	}
 
+	public function trueSatisfactionProvider() : \Generator {
+		yield [
+			$this->firstParamType(function ( FooAwareInterface $foo ) { }),
+			$this->returnType(function () : FooAwareInterface { }),
+		];
+
+		yield [
+			$this->firstParamType(function ( float $foo ) { }),
+			$this->returnType(fn () : float => 8.0),
+		];
+
+		yield [
+			$this->firstParamType(function ( mixed $foo ) { }),
+			$this->returnType(fn () : float => 8.0),
+		];
+
+		yield [
+			$this->firstParamType(function ( mixed $foo ) { }),
+			$this->returnType(fn () : FooAwareInterface|BazAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
+		];
+	}
+
 	public function falseSatisfactionProvider() : \Generator {
 		yield [
 			$this->firstParamType(function ( PersonInterface $foo ) { }),
@@ -130,6 +140,16 @@ class DNFTest extends TestCase {
 		yield [
 			$this->firstParamType(function ( int $foo ) { }),
 			$this->returnType(fn () : float => 8.0),
+		];
+
+		yield [
+			$this->firstParamType(function ( float $foo ) { }),
+			$this->returnType(fn () : mixed => 8.0),
+		];
+
+		yield [
+			$this->firstParamType(function ( FooAwareInterface|BazAwareInterface $foo ) { }),
+			$this->returnType(fn () : mixed => 8.0),
 		];
 	}
 
