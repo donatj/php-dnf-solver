@@ -49,6 +49,11 @@ class IntegrationTest extends TestCase {
 		];
 
 		yield [
+			new OrClause(new BuiltInType('float'), new BuiltInType('null')),
+			new BuiltInType('float'),
+		];
+
+		yield [
 			new UserDefinedType(BazAwareInterface::class),
 			new OrClause(new UserDefinedType(BazAwareInterface::class)),
 		];
@@ -110,6 +115,11 @@ class IntegrationTest extends TestCase {
 		yield [
 			new BuiltInType('float'),
 			new OrClause(new BuiltInType('float'), new BuiltInType('string')),
+		];
+
+		yield [
+			new BuiltInType('float'),
+			new OrClause(new BuiltInType('float'), new BuiltInType('null')),
 		];
 
 		yield [
