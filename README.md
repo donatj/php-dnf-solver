@@ -185,12 +185,12 @@ Represents a "and clause" - a set of types which must all be satisfied - e.g. "A
 #### Method: AndClause->__construct
 
 ```php
-function __construct(\donatj\PhpDnfSolver\LiteralDnfTypeInterface ...$types)
+function __construct(\donatj\PhpDnfSolver\SingularDnfTypeInterface ...$types)
 ```
 
 ##### Parameters:
 
-- ***\donatj\PhpDnfSolver\LiteralDnfTypeInterface*** `$types` - The list of types to be satisfied
+- ***\donatj\PhpDnfSolver\SingularDnfTypeInterface*** `$types` - The list of types to be satisfied
 
 ---
 
@@ -236,7 +236,7 @@ function getTypes() : array
 
 ##### Returns:
 
-- ***\donatj\PhpDnfSolver\LiteralDnfTypeInterface[]***
+- ***\donatj\PhpDnfSolver\SingularDnfTypeInterface[]***
 
 ### Class: \donatj\PhpDnfSolver\Types\BuiltInType
 
@@ -278,7 +278,7 @@ Return the canonical string representation of the DNF representation of this typ
 function getTypeName() : string
 ```
 
-Returns the fully qualified type name of this literal
+Returns the fully qualified type name of this type
 
 ---
 
@@ -302,7 +302,7 @@ If the given type matches "B&C", this method returns true.
 function count() : int
 ```
 
-Always 1 for literal types
+Always 1 for singular types
 
 Returns the number of types in this DNF type
 
@@ -313,12 +313,12 @@ Represents a "or" clause - a set of types where any one of them must be satisfie
 #### Method: OrClause->__construct
 
 ```php
-function __construct(\donatj\PhpDnfSolver\Types\AndClause|\donatj\PhpDnfSolver\LiteralDnfTypeInterface ...$types)
+function __construct(\donatj\PhpDnfSolver\Types\AndClause|\donatj\PhpDnfSolver\SingularDnfTypeInterface ...$types)
 ```
 
 ##### Parameters:
 
-- ***\donatj\PhpDnfSolver\Types\AndClause*** | ***\donatj\PhpDnfSolver\LiteralDnfTypeInterface*** `$types` - The list of types to be satisfied. Does not accept an OrClause as DNF defines that as invalid.
+- ***\donatj\PhpDnfSolver\Types\AndClause*** | ***\donatj\PhpDnfSolver\SingularDnfTypeInterface*** `$types` - The list of types to be satisfied. Does not accept an OrClause as DNF defines that as invalid.
 
 ---
 
@@ -409,7 +409,7 @@ Return the canonical string representation of the DNF representation of this typ
 function getTypeName() : string
 ```
 
-Returns the fully qualified type name of this literal
+Returns the fully qualified type name of this type
 
 ---
 
@@ -433,6 +433,6 @@ If the given type matches "B&C", this method returns true.
 function count() : int
 ```
 
-Always 1 for literal types
+Always 1 for singular types
 
 Returns the number of types in this DNF type

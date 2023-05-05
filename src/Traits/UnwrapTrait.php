@@ -3,16 +3,16 @@
 namespace donatj\PhpDnfSolver\Traits;
 
 use donatj\PhpDnfSolver\DnfTypeInterface;
-use donatj\PhpDnfSolver\LiteralDnfTypeInterface;
 use donatj\PhpDnfSolver\NestedDnfTypeInterface;
+use donatj\PhpDnfSolver\SingularDnfTypeInterface;
 
 trait UnwrapTrait {
 
 	/**
-	 * Un-nests a singular literal DNF type to a literal, or null if it cannot be unnested
+	 * Un-nests a singular yet nested DNF type to a singular, or null if it cannot be unwrapped
 	 */
-	private function unwrap(DnfTypeInterface $value) : ?LiteralDnfTypeInterface {
-		if ( $value instanceof LiteralDnfTypeInterface ) {
+	private function unwrap(DnfTypeInterface $value) : ?SingularDnfTypeInterface {
+		if ( $value instanceof SingularDnfTypeInterface ) {
 			return $value;
 		}
 
@@ -24,7 +24,7 @@ trait UnwrapTrait {
 			}
 		}
 
-		return $value instanceof LiteralDnfTypeInterface ? $value : null;
+		return $value instanceof SingularDnfTypeInterface ? $value : null;
 	}
 
 }

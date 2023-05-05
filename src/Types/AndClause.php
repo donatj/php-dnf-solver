@@ -3,21 +3,21 @@
 namespace donatj\PhpDnfSolver\Types;
 
 use donatj\PhpDnfSolver\DnfTypeInterface;
-use donatj\PhpDnfSolver\LiteralDnfTypeInterface;
 use donatj\PhpDnfSolver\NestedDnfTypeInterface;
+use donatj\PhpDnfSolver\SingularDnfTypeInterface;
 
 /**
  * Represents a "and clause" - a set of types which must all be satisfied - e.g. "A&B&C"
  */
 class AndClause implements NestedDnfTypeInterface {
 
-	/** @var LiteralDnfTypeInterface[] */
+	/** @var SingularDnfTypeInterface[] */
 	private array $types;
 
 	/**
-	 * @param \donatj\PhpDnfSolver\LiteralDnfTypeInterface ...$types The list of types to be satisfied
+	 * @param \donatj\PhpDnfSolver\SingularDnfTypeInterface ...$types The list of types to be satisfied
 	 */
-	public function __construct( LiteralDnfTypeInterface...$types ) {
+	public function __construct( SingularDnfTypeInterface...$types ) {
 		$this->types = $types;
 	}
 
@@ -28,7 +28,7 @@ class AndClause implements NestedDnfTypeInterface {
 	}
 
 	public function isSatisfiedBy( DnfTypeInterface $value ) : bool {
-		if( $value instanceof LiteralDnfTypeInterface ) {
+		if( $value instanceof SingularDnfTypeInterface ) {
 			$value = new AndClause($value);
 		}
 
@@ -50,7 +50,7 @@ class AndClause implements NestedDnfTypeInterface {
 	}
 
 	/**
-	 * @return \donatj\PhpDnfSolver\LiteralDnfTypeInterface[]
+	 * @return \donatj\PhpDnfSolver\SingularDnfTypeInterface[]
 	 */
 	public function getTypes() : array {
 		return $this->types;

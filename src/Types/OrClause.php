@@ -3,8 +3,8 @@
 namespace donatj\PhpDnfSolver\Types;
 
 use donatj\PhpDnfSolver\DnfTypeInterface;
-use donatj\PhpDnfSolver\LiteralDnfTypeInterface;
 use donatj\PhpDnfSolver\NestedDnfTypeInterface;
+use donatj\PhpDnfSolver\SingularDnfTypeInterface;
 
 /**
  * Represents a "or" clause - a set of types where any one of them must be satisfied - e.g. "A|B|(C&D)"
@@ -15,9 +15,9 @@ class OrClause implements NestedDnfTypeInterface {
 	private array $types;
 
 	/**
-	 * @param AndClause|LiteralDnfTypeInterface ...$types The list of types to be satisfied. Does not accept an OrClause as DNF defines that as invalid.
+	 * @param AndClause|SingularDnfTypeInterface ...$types The list of types to be satisfied. Does not accept an OrClause as DNF defines that as invalid.
 	 */
-	public function __construct( AndClause|LiteralDnfTypeInterface...$types ) {
+	public function __construct( AndClause|SingularDnfTypeInterface...$types ) {
 		foreach( $types as $type ) {
 			if( $type instanceof AndClause ) {
 				$this->types[] = $type;
@@ -34,7 +34,7 @@ class OrClause implements NestedDnfTypeInterface {
 	}
 
 	public function isSatisfiedBy( DnfTypeInterface $value ) : bool {
-		if( $value instanceof LiteralDnfTypeInterface ) {
+		if( $value instanceof SingularDnfTypeInterface ) {
 			$value = new OrClause($value);
 		}
 

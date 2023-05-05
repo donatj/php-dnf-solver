@@ -3,7 +3,7 @@
 namespace donatj\PhpDnfSolver\Types;
 
 use donatj\PhpDnfSolver\DnfTypeInterface;
-use donatj\PhpDnfSolver\LiteralDnfTypeInterface;
+use donatj\PhpDnfSolver\SingularDnfTypeInterface;
 use donatj\PhpDnfSolver\Traits\UnwrapTrait;
 
 /**
@@ -19,7 +19,7 @@ use donatj\PhpDnfSolver\Traits\UnwrapTrait;
  *
  * @see https://www.php.net/manual/en/reflectionnamedtype.isbuiltin.php
  */
-class BuiltInType implements LiteralDnfTypeInterface {
+class BuiltInType implements SingularDnfTypeInterface {
 
 	use UnwrapTrait;
 

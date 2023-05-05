@@ -4,13 +4,13 @@ namespace donatj\PhpDnfSolver\Types;
 
 use donatj\PhpDnfSolver\DnfTypeInterface;
 use donatj\PhpDnfSolver\Exceptions\InvalidArgumentException;
-use donatj\PhpDnfSolver\LiteralDnfTypeInterface;
+use donatj\PhpDnfSolver\SingularDnfTypeInterface;
 use donatj\PhpDnfSolver\Traits\UnwrapTrait;
 
 /**
  * Represents a "user defined type" - a class, interface, or trait, etc.
  */
-class UserDefinedType implements LiteralDnfTypeInterface {
+class UserDefinedType implements SingularDnfTypeInterface {
 
 	use UnwrapTrait;
 
