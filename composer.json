@@ -30,7 +30,8 @@
 	"autoload-dev": {
 		"psr-4": {
 			"": "stubs/",
-			"Tests\\": "test/"
+			"Tests\\": "test/",
+			"Tests82\\": "test82/"
 		}
 	},
 	"authors": [

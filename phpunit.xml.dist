@@ -5,6 +5,10 @@
 		<testsuite name="library">
 			<directory>test</directory>
 		</testsuite>
+
+		<testsuite name="library_php82">
+			<directory>test82</directory>
+		</testsuite>
 	</testsuites>
 	<coverage>
 		<include>
