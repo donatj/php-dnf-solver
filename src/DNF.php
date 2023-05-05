@@ -3,6 +3,7 @@
 namespace donatj\PhpDnfSolver;
 
 use donatj\PhpDnfSolver\Exceptions\InvalidArgumentException;
+use donatj\PhpDnfSolver\Types\OrClause;
 
 class DNF {
 
@@ -18,10 +19,16 @@ class DNF {
 	public static function getFromReflectionType( \ReflectionType $type ) : DnfTypeInterface {
 		if( $type instanceof \ReflectionNamedType ) {
 			if( $type->isBuiltin() ) {
-				return new Types\BuiltInType($type->getName());
+				$dnfType = new Types\BuiltInType($type->getName());
+			} else {
+				$dnfType = new Types\UserDefinedType($type->getName());
 			}
 
-			return new Types\UserDefinedType($type->getName());
+			if( $type->allowsNull() && $type->getName() !== 'null' ) {
+				return new OrClause($dnfType, new Types\BuiltInType('null'));
+			}
+
+			return $dnfType;
 		}
 
 		if( $type instanceof \ReflectionIntersectionType ) {

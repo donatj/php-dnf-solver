@@ -25,12 +25,38 @@ class DNFTest extends TestCase {
 		$this->assertSame('int', $dnf->dnf());
 
 		$dnf = DNF::getFromReflectionType(
+			(new \ReflectionFunction(function () : ?int {
+				return 1;
+			}))->getReturnType()
+		);
+		$this->assertSame('int|null', $dnf->dnf());
+		$this->assertInstanceOf(OrClause::class, $dnf);
+		$dnfTypes = $dnf->getTypes();
+		$this->assertInstanceOf(BuiltInType::class, $dnfTypes[0]->getTypes()[0]);
+		$this->assertSame('int', $dnfTypes[0]->dnf());
+		$this->assertInstanceOf(BuiltInType::class, $dnfTypes[1]->getTypes()[0]);
+		$this->assertSame('null', $dnfTypes[1]->dnf());
+
+		$dnf = DNF::getFromReflectionType(
 			(new \ReflectionFunction(function () : BazAwareInterface {
 				return $this->getMockBuilder(BazAwareInterface::class)->getMock();
 			}))->getReturnType()
 		);
 		$this->assertInstanceOf(UserDefinedType::class, $dnf);
 		$this->assertSame(BazAwareInterface::class, $dnf->dnf());
+
+		$dnf = DNF::getFromReflectionType(
+			(new \ReflectionFunction(function () : ?BazAwareInterface {
+				return $this->getMockBuilder(BazAwareInterface::class)->getMock();
+			}))->getReturnType()
+		);
+		$this->assertSame('Interfaces\BazAwareInterface|null', $dnf->dnf());
+		$this->assertInstanceOf(OrClause::class, $dnf);
+		$dnfTypes = $dnf->getTypes();
+		$this->assertInstanceOf(UserDefinedType::class, $dnfTypes[0]->getTypes()[0]); // Gets jammed into an AND
+		$this->assertSame(BazAwareInterface::class, $dnfTypes[0]->getTypes()[0]->dnf());
+		$this->assertInstanceOf(BuiltInType::class, $dnfTypes[1]->getTypes()[0]);
+		$this->assertSame('null', $dnfTypes[1]->dnf());
 
 		$dnf = DNF::getFromReflectionType(
 			(new \ReflectionFunction(function () : FooAwareInterface|BazAwareInterface {
