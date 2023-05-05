@@ -9,11 +9,14 @@ use donatj\PhpDnfSolver\Types\OrClause;
 use donatj\PhpDnfSolver\Types\UserDefinedType;
 use Interfaces\BazAwareInterface;
 use Interfaces\FooAwareInterface;
+use Objects\Person\BarPerson;
 use Objects\Person\BarPersonInterface;
 use Objects\Person\PersonInterface;
 use PHPUnit\Framework\TestCase;
 
 class DNFTest extends TestCase {
+
+	use TypeHelperTrait;
 
 	public function test_getFromReflectionType() : void {
 		$dnf = DNF::getFromReflectionType(
@@ -75,14 +78,6 @@ class DNFTest extends TestCase {
 		$this->assertSame('Interfaces\FooAwareInterface&Interfaces\BazAwareInterface', $dnf->dnf());
 	}
 
-	private function firstParamType( callable $reflection ) : \ReflectionType {
-		return (new \ReflectionFunction($reflection))->getParameters()[0]->getType();
-	}
-
-	private function returnType( callable $reflection ) : \ReflectionType {
-		return (new \ReflectionFunction($reflection))->getReturnType();
-	}
-
 	/**
 	 * @dataProvider trueSatisfactionProvider
 	 */
@@ -129,6 +124,16 @@ class DNFTest extends TestCase {
 			$this->firstParamType(function ( mixed $foo ) { }),
 			$this->returnType(fn () : FooAwareInterface|BazAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
 		];
+
+		yield [
+			$this->firstParamType(function ( FooAwareInterface $foo ) { }),
+			$this->returnType(fn () : FooAwareInterface&BazAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
+		];
+
+		yield [
+			$this->firstParamType(function ( FooAwareInterface&BazAwareInterface $foo ) { }),
+			$this->returnType(fn () : BarPerson => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
+		];
 	}
 
 	public function falseSatisfactionProvider() : \Generator {
@@ -150,6 +155,11 @@ class DNFTest extends TestCase {
 		yield [
 			$this->firstParamType(function ( FooAwareInterface|BazAwareInterface $foo ) { }),
 			$this->returnType(fn () : mixed => 8.0),
+		];
+
+		yield [
+			$this->firstParamType(function ( FooAwareInterface&BazAwareInterface $foo ) { }),
+			$this->returnType(fn () : FooAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
 		];
 	}
 

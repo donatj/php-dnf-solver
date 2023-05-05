@@ -33,6 +33,15 @@ class UserDefinedType implements SingularDnfTypeInterface {
 	}
 
 	public function isSatisfiedBy( DnfTypeInterface $value ) : bool {
+		if($value instanceof AndClause) {
+			$types = $value->getTypes();
+			foreach($types as $type) {
+				if($this->isSatisfiedBy($type)) {
+					return true;
+				}
+			}
+		}
+
 		$value = $this->unwrap($value);
 		if( !$value ) {
 			return false;
