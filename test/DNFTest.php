@@ -11,6 +11,7 @@ use Interfaces\BazAwareInterface;
 use Interfaces\FooAwareInterface;
 use Objects\Person\BarPerson;
 use Objects\Person\BarPersonInterface;
+use Objects\Person\InvokablePersonFactory;
 use Objects\Person\PersonInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -134,6 +135,16 @@ class DNFTest extends TestCase {
 			$this->firstParamType(function ( FooAwareInterface&BazAwareInterface $foo ) { }),
 			$this->returnType(fn () : BarPerson => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
 		];
+
+		yield [
+			$this->firstParamType(function ( callable $foo ) { }),
+			$this->returnType(fn () : InvokablePersonFactory => $this->getMockBuilder(InvokablePersonFactory::class)->getMock()),
+		];
+
+		yield [
+			$this->firstParamType(function ( callable $foo ) { }),
+			$this->returnType(fn () : callable => $this->getMockBuilder(InvokablePersonFactory::class)->getMock()),
+		];
 	}
 
 	public function falseSatisfactionProvider() : \Generator {
@@ -160,6 +171,16 @@ class DNFTest extends TestCase {
 		yield [
 			$this->firstParamType(function ( FooAwareInterface&BazAwareInterface $foo ) { }),
 			$this->returnType(fn () : FooAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
+		];
+
+		yield [
+			$this->firstParamType(function ( InvokablePersonFactory $foo ) { }),
+			$this->returnType(fn () : callable => $this->getMockBuilder(InvokablePersonFactory::class)->getMock()),
+		];
+
+		yield [
+			$this->firstParamType(function ( callable $foo ) { }),
+			$this->returnType(fn () : callable|InvokablePersonFactory => $this->getMockBuilder(InvokablePersonFactory::class)->getMock()),
 		];
 	}
 

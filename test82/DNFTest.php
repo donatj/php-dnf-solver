@@ -7,6 +7,7 @@ use donatj\PhpDnfSolver\Types\OrClause;
 use Interfaces\BazAwareInterface;
 use Interfaces\FooAwareInterface;
 use Objects\Person\BarPerson;
+use Objects\Person\InvokablePersonFactory;
 use PHPUnit\Framework\TestCase;
 use Tests\TypeHelperTrait;
 
@@ -67,6 +68,11 @@ class DNFTest extends TestCase {
 			$this->firstParamType(function( (FooAwareInterface&BazAwareInterface)|int $foo ) { }),
 			$this->returnType(fn() : int => 10),
 		];
+
+		yield [
+			$this->firstParamType(function( (FooAwareInterface&InvokablePersonFactory)|callable $foo ) { }),
+			$this->returnType(fn() : callable => fn() => 10),
+		];
 	}
 
 	public function falseSatisfactionProvider() : \Generator {
@@ -78,6 +84,11 @@ class DNFTest extends TestCase {
 		yield [
 			$this->firstParamType(function( (FooAwareInterface&BazAwareInterface)|null $foo ) { }),
 			$this->returnType(fn() : ?FooAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
+		];
+
+		yield [
+			$this->firstParamType(function( callable $foo ) { }),
+			$this->returnType(fn() : (FooAwareInterface&InvokablePersonFactory)|callable => fn() => 10),
 		];
 	}
 

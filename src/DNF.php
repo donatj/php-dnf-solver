@@ -19,6 +19,10 @@ class DNF {
 	public static function getFromReflectionType( \ReflectionType $type ) : DnfTypeInterface {
 		if( $type instanceof \ReflectionNamedType ) {
 			if( $type->isBuiltin() ) {
+				if( $type->getName() === 'callable' ) {
+					return new Types\CallableType;
+				}
+
 				$dnfType = new Types\BuiltInType($type->getName());
 				if( $type->getName() === 'mixed' ) {
 					return $dnfType;

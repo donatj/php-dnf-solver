@@ -5,11 +5,14 @@ namespace Tests;
 use donatj\PhpDnfSolver\DnfTypeInterface;
 use donatj\PhpDnfSolver\Types\AndClause;
 use donatj\PhpDnfSolver\Types\BuiltInType;
+use donatj\PhpDnfSolver\Types\CallableType;
 use donatj\PhpDnfSolver\Types\OrClause;
 use donatj\PhpDnfSolver\Types\UserDefinedType;
 use Interfaces\BazAwareInterface;
 use Interfaces\FooAwareInterface;
 use Objects\Person\BarPersonInterface;
+use Objects\Person\InvokablePersonFactory;
+use Objects\Person\PersonInterface;
 use PHPUnit\Framework\TestCase;
 
 class IntegrationTest extends TestCase {
@@ -99,6 +102,16 @@ class IntegrationTest extends TestCase {
 				),
 			),
 		];
+
+		yield [
+			new CallableType,
+			new CallableType,
+		];
+
+		yield [
+			new CallableType,
+			new UserDefinedType(InvokablePersonFactory::class),
+		];
 	}
 
 	public static function falseCaseProviders() : \Generator {
@@ -173,6 +186,11 @@ class IntegrationTest extends TestCase {
 
 				),
 			),
+		];
+
+		yield [
+			new CallableType,
+			new UserDefinedType(PersonInterface::class),
 		];
 	}
 

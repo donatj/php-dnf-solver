@@ -306,6 +306,59 @@ Always 1 for singular types
 
 Returns the number of types in this DNF type
 
+### Class: \donatj\PhpDnfSolver\Types\CallableType
+
+Represents a "callable" type
+
+This includes:
+- callable
+- Closure
+- Invokable classes
+
+#### Method: CallableType->dnf
+
+```php
+function dnf() : string
+```
+
+Return the canonical string representation of the DNF representation of this type
+
+---
+
+#### Method: CallableType->isSatisfiedBy
+
+```php
+function isSatisfiedBy(\donatj\PhpDnfSolver\DnfTypeInterface $value) : bool
+```
+
+Tests if this type is satisfied by the given type  
+  
+For example, if this type is "A|(B&C)" and the given type matches just "A", this method returns true.  
+If the given type matches just "B", this method returns false.  
+If the given type matches "B&C", this method returns true.
+
+---
+
+#### Method: CallableType->getTypeName
+
+```php
+function getTypeName() : string
+```
+
+Returns the fully qualified type name of this type
+
+---
+
+#### Method: CallableType->count
+
+```php
+function count() : int
+```
+
+Always 1 for singular types
+
+Returns the number of types in this DNF type
+
 ### Class: \donatj\PhpDnfSolver\Types\OrClause
 
 Represents a "or" clause - a set of types where any one of them must be satisfied - e.g. "A|B|(C&D)"
