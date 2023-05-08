@@ -10,7 +10,7 @@
 		"solver"
 	],
 	"require": {
-		"php": "^8.1"
+		"php": "^8.1.0 || ^8.2.0"
 	},
 	"require-dev": {
 		"donatj/drop": "^1.1",
