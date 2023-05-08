@@ -1,6 +1,6 @@
 <?php
 
-namespace Objects\Person\UserAwarenessInterfaces;
+namespace Objects\Person\PersonAwarenessInterfaces;
 
 use Interfaces\FooAwareInterface;
 use Objects\Person\PersonInterface;
