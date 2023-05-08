@@ -4,6 +4,7 @@
 			<badge-poser type="version"/>
 			<badge-poser type="license"/>
 			<badge-github-action name="donatj/php-dnf-solver" workflow-file="ci.yml"/>
+			<badge-coveralls name="github/donatj/php-dnf-solver"/>
 
 			<text>PHP DNF (Disjunctive Normal Form) Signature Compatibility Solver - see: https://wiki.php.net/rfc/dnf_types</text>
 
