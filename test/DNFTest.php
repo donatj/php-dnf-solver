@@ -182,6 +182,11 @@ class DNFTest extends TestCase {
 			$this->firstParamType(function ( callable $foo ) { }),
 			$this->returnType(fn () : callable|InvokablePersonFactory => $this->getMockBuilder(InvokablePersonFactory::class)->getMock()),
 		];
+
+		yield [
+			$this->firstParamType(function ( callable $foo ) { }),
+			$this->returnType(fn () : string => "soup"),
+		];
 	}
 
 }
