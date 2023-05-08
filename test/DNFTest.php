@@ -79,6 +79,15 @@ class DNFTest extends TestCase {
 		$this->assertSame('Interfaces\FooAwareInterface&Interfaces\BazAwareInterface', $dnf->dnf());
 	}
 
+	public function test_getFromReflectionType_exception() : void {
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessageMatches('/^Unknown ReflectionType: /');
+		$test = new class extends \ReflectionType {
+
+		};
+		DNF::getFromReflectionType($test);
+	}
+
 	/**
 	 * @dataProvider trueSatisfactionProvider
 	 */
@@ -187,6 +196,39 @@ class DNFTest extends TestCase {
 			$this->firstParamType(function ( callable $foo ) { }),
 			$this->returnType(fn () : string => "soup"),
 		];
+	}
+
+	public function test_getFromVarType() : void {
+		$foo = fn ( FooAwareInterface $foo ) => $foo;
+		$rf  = new \ReflectionFunction($foo);
+		$dnf = DNF::getFromVarType($rf->getParameters()[0]);
+		$this->assertSame(FooAwareInterface::class, $dnf->dnf());
+
+		$test = new class {
+
+			public FooAwareInterface $bar;
+
+		};
+		$rf   = new \ReflectionProperty($test, 'bar');
+		$dnf  = DNF::getFromVarType($rf);
+		$this->assertSame(FooAwareInterface::class, $dnf->dnf());
+	}
+
+	public function test_getFromReturnType() : void {
+		$foo = fn () : FooAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock();
+		$rf  = new \ReflectionFunction($foo);
+		$dnf = DNF::getFromReturnType($rf);
+		$this->assertSame(FooAwareInterface::class, $dnf->dnf());
+
+		$foo = fn () : FooAwareInterface|BazAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock();
+		$rf  = new \ReflectionFunction($foo);
+		$dnf = DNF::getFromReturnType($rf);
+		$this->assertSame('Interfaces\FooAwareInterface|Interfaces\BazAwareInterface', $dnf->dnf());
+
+		$foo = fn () : FooAwareInterface&BazAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock();
+		$rf  = new \ReflectionFunction($foo);
+		$dnf = DNF::getFromReturnType($rf);
+		$this->assertSame('Interfaces\FooAwareInterface&Interfaces\BazAwareInterface', $dnf->dnf());
 	}
 
 }
