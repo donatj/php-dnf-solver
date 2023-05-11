@@ -1,9 +1,9 @@
 <?php
 
-namespace Objects\Person;
+namespace Stubs\Objects\Person;
 
-use Traits\BazAwareTrait;
-use Traits\FooAwareTrait;
+use Stubs\Traits\BazAwareTrait;
+use Stubs\Traits\FooAwareTrait;
 
 class BarPerson extends Decorator implements BarPersonInterface {
 

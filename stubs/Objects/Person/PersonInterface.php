@@ -1,9 +1,9 @@
 <?php
 
-namespace Objects\Person;
+namespace Stubs\Objects\Person;
 
-use Interfaces\GarplyMemberInterface;
 use JsonSerializable;
+use Stubs\Interfaces\GarplyMemberInterface;
 
 interface PersonInterface extends GarplyMemberInterface, JsonSerializable {
 

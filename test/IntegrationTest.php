@@ -8,12 +8,12 @@ use donatj\PhpDnfSolver\Types\BuiltInType;
 use donatj\PhpDnfSolver\Types\CallableType;
 use donatj\PhpDnfSolver\Types\OrClause;
 use donatj\PhpDnfSolver\Types\UserDefinedType;
-use Interfaces\BazAwareInterface;
-use Interfaces\FooAwareInterface;
-use Objects\Person\BarPersonInterface;
-use Objects\Person\InvokablePersonFactory;
-use Objects\Person\PersonInterface;
 use PHPUnit\Framework\TestCase;
+use Stubs\Interfaces\BazAwareInterface;
+use Stubs\Interfaces\FooAwareInterface;
+use Stubs\Objects\Person\BarPersonInterface;
+use Stubs\Objects\Person\InvokablePersonFactory;
+use Stubs\Objects\Person\PersonInterface;
 
 class IntegrationTest extends TestCase {
 

@@ -4,9 +4,9 @@ namespace Tests\Types;
 
 use donatj\PhpDnfSolver\Exceptions\InvalidArgumentException;
 use donatj\PhpDnfSolver\Types\UserDefinedType;
-use Interfaces\BazAwareInterface;
 use PHPUnit\Framework\TestCase;
-use Traits\BazAwareTrait;
+use Stubs\Interfaces\BazAwareInterface;
+use Stubs\Traits\BazAwareTrait;
 
 class UserDefinedTypeTest extends TestCase {
 

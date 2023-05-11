@@ -7,13 +7,13 @@ use donatj\PhpDnfSolver\Types\AndClause;
 use donatj\PhpDnfSolver\Types\BuiltInType;
 use donatj\PhpDnfSolver\Types\OrClause;
 use donatj\PhpDnfSolver\Types\UserDefinedType;
-use Interfaces\BazAwareInterface;
-use Interfaces\FooAwareInterface;
-use Objects\Person\BarPerson;
-use Objects\Person\BarPersonInterface;
-use Objects\Person\InvokablePersonFactory;
-use Objects\Person\PersonInterface;
 use PHPUnit\Framework\TestCase;
+use Stubs\Interfaces\BazAwareInterface;
+use Stubs\Interfaces\FooAwareInterface;
+use Stubs\Objects\Person\BarPerson;
+use Stubs\Objects\Person\BarPersonInterface;
+use Stubs\Objects\Person\InvokablePersonFactory;
+use Stubs\Objects\Person\PersonInterface;
 
 class DNFTest extends TestCase {
 
@@ -54,7 +54,7 @@ class DNFTest extends TestCase {
 				return $this->getMockBuilder(BazAwareInterface::class)->getMock();
 			}))->getReturnType()
 		);
-		$this->assertSame('Interfaces\BazAwareInterface|null', $dnf->dnf());
+		$this->assertSame('Stubs\Interfaces\BazAwareInterface|null', $dnf->dnf());
 		$this->assertInstanceOf(OrClause::class, $dnf);
 		$dnfTypes = $dnf->getTypes();
 		$this->assertInstanceOf(UserDefinedType::class, $dnfTypes[0]->getTypes()[0]); // Gets jammed into an AND
@@ -68,7 +68,7 @@ class DNFTest extends TestCase {
 			}))->getReturnType()
 		);
 		$this->assertInstanceOf(OrClause::class, $dnf);
-		$this->assertSame('Interfaces\FooAwareInterface|Interfaces\BazAwareInterface', $dnf->dnf());
+		$this->assertSame('Stubs\Interfaces\FooAwareInterface|Stubs\Interfaces\BazAwareInterface', $dnf->dnf());
 
 		$dnf = DNF::getFromReflectionType(
 			(new \ReflectionFunction(function () : FooAwareInterface&BazAwareInterface {
@@ -76,7 +76,7 @@ class DNFTest extends TestCase {
 			}))->getReturnType()
 		);
 		$this->assertInstanceOf(AndClause::class, $dnf);
-		$this->assertSame('Interfaces\FooAwareInterface&Interfaces\BazAwareInterface', $dnf->dnf());
+		$this->assertSame('Stubs\Interfaces\FooAwareInterface&Stubs\Interfaces\BazAwareInterface', $dnf->dnf());
 	}
 
 	public function test_getFromReflectionType_exception() : void {
@@ -223,12 +223,12 @@ class DNFTest extends TestCase {
 		$foo = fn () : FooAwareInterface|BazAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock();
 		$rf  = new \ReflectionFunction($foo);
 		$dnf = DNF::getFromReturnType($rf);
-		$this->assertSame('Interfaces\FooAwareInterface|Interfaces\BazAwareInterface', $dnf->dnf());
+		$this->assertSame('Stubs\Interfaces\FooAwareInterface|Stubs\Interfaces\BazAwareInterface', $dnf->dnf());
 
 		$foo = fn () : FooAwareInterface&BazAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock();
 		$rf  = new \ReflectionFunction($foo);
 		$dnf = DNF::getFromReturnType($rf);
-		$this->assertSame('Interfaces\FooAwareInterface&Interfaces\BazAwareInterface', $dnf->dnf());
+		$this->assertSame('Stubs\Interfaces\FooAwareInterface&Stubs\Interfaces\BazAwareInterface', $dnf->dnf());
 	}
 
 }

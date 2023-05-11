@@ -1,6 +1,6 @@
 <?php
 
-namespace Objects\Person;
+namespace Stubs\Objects\Person;
 
 abstract class Decorator implements PersonInterface {
 
