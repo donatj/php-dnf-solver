@@ -4,11 +4,11 @@ namespace Tests82;
 
 use donatj\PhpDnfSolver\DNF;
 use donatj\PhpDnfSolver\Types\OrClause;
-use Interfaces\BazAwareInterface;
-use Interfaces\FooAwareInterface;
-use Objects\Person\BarPerson;
-use Objects\Person\InvokablePersonFactory;
 use PHPUnit\Framework\TestCase;
+use Stubs\Interfaces\BazAwareInterface;
+use Stubs\Interfaces\FooAwareInterface;
+use Stubs\Objects\Person\BarPerson;
+use Stubs\Objects\Person\InvokablePersonFactory;
 use Tests\TypeHelperTrait;
 
 class DNFTest extends TestCase {
@@ -23,10 +23,10 @@ class DNFTest extends TestCase {
 		);
 		$this->assertInstanceOf(OrClause::class, $dnf);
 		$this->assertCount(3, $dnf);
-		$this->assertSame('(Interfaces\FooAwareInterface&Interfaces\BazAwareInterface)|int|null', $dnf->dnf());
+		$this->assertSame('(Stubs\Interfaces\FooAwareInterface&Stubs\Interfaces\BazAwareInterface)|int|null', $dnf->dnf());
 
 		$types = $dnf->getTypes();
-		$this->assertSame('Interfaces\FooAwareInterface&Interfaces\BazAwareInterface', $types[0]->dnf());
+		$this->assertSame('Stubs\Interfaces\FooAwareInterface&Stubs\Interfaces\BazAwareInterface', $types[0]->dnf());
 		$this->assertSame('int', $types[1]->dnf());
 		$this->assertSame('null', $types[2]->dnf());
 	}

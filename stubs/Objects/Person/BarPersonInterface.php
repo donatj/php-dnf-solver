@@ -1,9 +1,9 @@
 <?php
 
-namespace Objects\Person;
+namespace Stubs\Objects\Person;
 
-use Objects\Person\PersonAwarenessInterfaces\BazAwarePersonInterface;
-use Objects\Person\PersonAwarenessInterfaces\FooAwarePersonInterface;
+use Stubs\Objects\Person\PersonAwarenessInterfaces\BazAwarePersonInterface;
+use Stubs\Objects\Person\PersonAwarenessInterfaces\FooAwarePersonInterface;
 
 interface BarPersonInterface extends BazAwarePersonInterface, FooAwarePersonInterface {
 

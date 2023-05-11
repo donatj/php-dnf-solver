@@ -1,10 +1,10 @@
 <?php
 
-namespace Objects\Person;
+namespace Stubs\Objects\Person;
 
-use Traits\GarplyIdAwareTrait;
-use Traits\NullableIdAwareTrait;
-use Traits\QuxIdAwareTrait;
+use Stubs\Traits\GarplyIdAwareTrait;
+use Stubs\Traits\NullableIdAwareTrait;
+use Stubs\Traits\QuxIdAwareTrait;
 
 class Person implements PersonInterface {
 

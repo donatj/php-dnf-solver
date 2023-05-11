@@ -1,9 +1,9 @@
 <?php
 
-namespace Objects\Person\PersonAwarenessInterfaces;
+namespace Stubs\Objects\Person\PersonAwarenessInterfaces;
 
-use Interfaces\FooAwareInterface;
-use Objects\Person\PersonInterface;
+use Stubs\Interfaces\FooAwareInterface;
+use Stubs\Objects\Person\PersonInterface;
 
 interface FooAwarePersonInterface extends FooAwareInterface, PersonInterface {
 

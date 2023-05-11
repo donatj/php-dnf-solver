@@ -1,6 +1,6 @@
 <?php
 
-namespace Interfaces;
+namespace Stubs\Interfaces;
 
 interface GarplyMemberInterface extends
 	GarplyIdAwareInterface,
