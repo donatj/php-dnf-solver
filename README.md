@@ -10,7 +10,7 @@ PHP DNF (Disjunctive Normal Form) Signature Compatibility Solver - see: https://
 
 ## Requirements
 
-- **php**: ^8.1
+- **php**: ^8.1.0 || ^8.2.0
 
 ## Installing
 
@@ -129,7 +129,7 @@ string(52) "(Examples\A&Examples\B)|(Examples\B&Examples\C)|null"
 #### Method: DNF::getFromReflectionType
 
 ```php
-function getFromReflectionType(\ReflectionType $type) : \donatj\PhpDnfSolver\DnfTypeInterface
+function getFromReflectionType(\ReflectionType $type) : \donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface
 ```
 
 Helper to convert a ReflectionType into it's DNF representation  
@@ -161,7 +161,7 @@ Helper to quickly check if a ReflectionType satisfies another ReflectionType
 #### Method: DNF::getFromVarType
 
 ```php
-function getFromVarType(\ReflectionParameter|\ReflectionProperty $parameter) : ?\donatj\PhpDnfSolver\DnfTypeInterface
+function getFromVarType(\ReflectionParameter|\ReflectionProperty $parameter) : \donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface|null
 ```
 
 Helper to quickly get a DNF representation of a (ReflectionParameter or ReflectionProperty)'s return type
@@ -171,13 +171,15 @@ Helper to quickly get a DNF representation of a (ReflectionParameter or Reflecti
 #### Method: DNF::getFromReturnType
 
 ```php
-function getFromReturnType(\ReflectionFunctionAbstract $func) : ?\donatj\PhpDnfSolver\DnfTypeInterface
+function getFromReturnType(\ReflectionFunctionAbstract $func) : \donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface|null
 ```
 
 Helper to quickly get a DNF representation of a ReflectionFunctionAbstract (ReflectionFunction /  
 ReflectionMethod)'s return type
 
 ### Class: \donatj\PhpDnfSolver\Exceptions\InvalidArgumentException
+
+### Class: \donatj\PhpDnfSolver\Exceptions\LogicException
 
 ### Class: \donatj\PhpDnfSolver\Types\AndClause
 
@@ -208,7 +210,7 @@ Return the canonical string representation of the DNF representation of this typ
 #### Method: AndClause->isSatisfiedBy
 
 ```php
-function isSatisfiedBy(\donatj\PhpDnfSolver\DnfTypeInterface $value) : bool
+function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value) : bool
 ```
 
 Tests if this type is satisfied by the given type  
@@ -286,7 +288,7 @@ Returns the fully qualified type name of this type
 #### Method: BuiltInType->isSatisfiedBy
 
 ```php
-function isSatisfiedBy(\donatj\PhpDnfSolver\DnfTypeInterface $value) : bool
+function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value) : bool
 ```
 
 Tests if this type is satisfied by the given type  
@@ -329,7 +331,7 @@ Return the canonical string representation of the DNF representation of this typ
 #### Method: CallableType->isSatisfiedBy
 
 ```php
-function isSatisfiedBy(\donatj\PhpDnfSolver\DnfTypeInterface $value) : bool
+function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value) : bool
 ```
 
 Tests if this type is satisfied by the given type  
@@ -389,7 +391,7 @@ Return the canonical string representation of the DNF representation of this typ
 #### Method: OrClause->isSatisfiedBy
 
 ```php
-function isSatisfiedBy(\donatj\PhpDnfSolver\DnfTypeInterface $value) : bool
+function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value) : bool
 ```
 
 Tests if this type is satisfied by the given type  
@@ -441,7 +443,7 @@ function __construct(string $className)
 
 ##### Parameters:
 
-- ***string*** `$className` - The name of the class, interface, or trait to be satisfied
+- ***class-string*** `$className` - The name of the class, interface, or trait to be satisfied
 
 **Throws**: `\donatj\PhpDnfSolver\Exceptions\InvalidArgumentException` - if the user defined type does not exist after triggering registered autoloaders
 
@@ -465,12 +467,16 @@ function getTypeName() : string
 
 Returns the fully qualified type name of this type
 
+##### Returns:
+
+- ***class-string***
+
 ---
 
 #### Method: UserDefinedType->isSatisfiedBy
 
 ```php
-function isSatisfiedBy(\donatj\PhpDnfSolver\DnfTypeInterface $value) : bool
+function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value) : bool
 ```
 
 Tests if this type is satisfied by the given type  

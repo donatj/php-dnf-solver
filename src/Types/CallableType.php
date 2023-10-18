@@ -2,7 +2,7 @@
 
 namespace donatj\PhpDnfSolver\Types;
 
-use donatj\PhpDnfSolver\DnfTypeInterface;
+use donatj\PhpDnfSolver\NestedDnfTypeInterface;
 use donatj\PhpDnfSolver\SingularDnfTypeInterface;
 use donatj\PhpDnfSolver\Traits\UnwrapTrait;
 
@@ -22,7 +22,7 @@ class CallableType implements SingularDnfTypeInterface {
 		return 'callable';
 	}
 
-	public function isSatisfiedBy( DnfTypeInterface $value ) : bool {
+	public function isSatisfiedBy( SingularDnfTypeInterface|NestedDnfTypeInterface $value ) : bool {
 		$value = $this->unwrap($value);
 		if( !$value ) {
 			return false;
@@ -39,6 +39,9 @@ class CallableType implements SingularDnfTypeInterface {
 		return false;
 	}
 
+	/**
+	 * @param class-string $className
+	 */
 	private function isClassInvokable( string $className ) : bool {
 		return (new \ReflectionClass($className))->hasMethod('__invoke');
 	}
