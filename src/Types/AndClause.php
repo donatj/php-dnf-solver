@@ -27,7 +27,7 @@ class AndClause implements NestedDnfTypeInterface {
 		);
 	}
 
-	public function isSatisfiedBy( DnfTypeInterface $value ) : bool {
+	public function isSatisfiedBy( SingularDnfTypeInterface|NestedDnfTypeInterface $value ) : bool {
 		if( $value instanceof SingularDnfTypeInterface ) {
 			$value = new AndClause($value);
 		}

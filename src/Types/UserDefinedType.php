@@ -2,8 +2,8 @@
 
 namespace donatj\PhpDnfSolver\Types;
 
-use donatj\PhpDnfSolver\DnfTypeInterface;
 use donatj\PhpDnfSolver\Exceptions\InvalidArgumentException;
+use donatj\PhpDnfSolver\NestedDnfTypeInterface;
 use donatj\PhpDnfSolver\SingularDnfTypeInterface;
 use donatj\PhpDnfSolver\Traits\UnwrapTrait;
 
@@ -15,7 +15,7 @@ class UserDefinedType implements SingularDnfTypeInterface {
 	use UnwrapTrait;
 
 	/**
-	 * @param string $className The name of the class, interface, or trait to be satisfied
+	 * @param class-string $className The name of the class, interface, or trait to be satisfied
 	 * @throws \donatj\PhpDnfSolver\Exceptions\InvalidArgumentException if the user defined type does not exist after triggering registered autoloaders
 	 */
 	public function __construct( public string $className ) {
@@ -28,11 +28,14 @@ class UserDefinedType implements SingularDnfTypeInterface {
 		return $this->className;
 	}
 
+	/**
+	 * @return class-string
+	 */
 	public function getTypeName() : string {
 		return $this->className;
 	}
 
-	public function isSatisfiedBy( DnfTypeInterface $value ) : bool {
+	public function isSatisfiedBy( SingularDnfTypeInterface|NestedDnfTypeInterface $value ) : bool {
 		if($value instanceof AndClause) {
 			$types = $value->getTypes();
 			foreach($types as $type) {

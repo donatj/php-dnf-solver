@@ -12,7 +12,7 @@ use donatj\PhpDnfSolver\SingularDnfTypeInterface;
 class OrClause implements NestedDnfTypeInterface {
 
 	/** @var AndClause[] */
-	private array $types;
+	private array $types = [];
 
 	/**
 	 * @param AndClause|SingularDnfTypeInterface ...$types The list of types to be satisfied. Does not accept an OrClause as DNF defines that as invalid.
@@ -33,12 +33,12 @@ class OrClause implements NestedDnfTypeInterface {
 		);
 	}
 
-	public function isSatisfiedBy( DnfTypeInterface $value ) : bool {
+	public function isSatisfiedBy( SingularDnfTypeInterface|NestedDnfTypeInterface $value ) : bool {
 		if( $value instanceof SingularDnfTypeInterface ) {
 			$value = new OrClause($value);
 		}
 
-		foreach( $value->types as $valueType ) {
+		foreach( $value->getTypes() as $valueType ) {
 			$matched = false;
 			foreach( $this->types as $type ) {
 				if( $type->isSatisfiedBy($valueType) ) {

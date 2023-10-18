@@ -2,7 +2,7 @@
 
 namespace donatj\PhpDnfSolver\Types;
 
-use donatj\PhpDnfSolver\DnfTypeInterface;
+use donatj\PhpDnfSolver\NestedDnfTypeInterface;
 use donatj\PhpDnfSolver\SingularDnfTypeInterface;
 use donatj\PhpDnfSolver\Traits\UnwrapTrait;
 
@@ -37,7 +37,7 @@ class BuiltInType implements SingularDnfTypeInterface {
 		return $this->name;
 	}
 
-	public function isSatisfiedBy( DnfTypeInterface $value ) : bool {
+	public function isSatisfiedBy( SingularDnfTypeInterface|NestedDnfTypeInterface $value ) : bool {
 		if($this->name === 'mixed') {
 			return true;
 		}

@@ -3,6 +3,8 @@
 namespace donatj\PhpDnfSolver;
 
 use donatj\PhpDnfSolver\Exceptions\InvalidArgumentException;
+use donatj\PhpDnfSolver\Exceptions\LogicException;
+use donatj\PhpDnfSolver\Types\AndClause;
 use donatj\PhpDnfSolver\Types\OrClause;
 
 class DNF {
@@ -16,7 +18,7 @@ class DNF {
 	 * - ReflectionMethod::getReturnType()
 	 * - ReflectionProperty::getType()
 	 */
-	public static function getFromReflectionType( \ReflectionType $type ) : DnfTypeInterface {
+	public static function getFromReflectionType( \ReflectionType $type ) : SingularDnfTypeInterface|NestedDnfTypeInterface {
 		if( $type instanceof \ReflectionNamedType ) {
 			if( $type->isBuiltin() ) {
 				if( $type->getName() === 'callable' ) {
@@ -28,6 +30,7 @@ class DNF {
 					return $dnfType;
 				}
 			} else {
+				// @phpstan-ignore-next-line
 				$dnfType = new Types\UserDefinedType($type->getName());
 			}
 
@@ -40,7 +43,14 @@ class DNF {
 
 		if( $type instanceof \ReflectionIntersectionType ) {
 			$types = array_map(
-				fn ( \ReflectionType $type ) => self::getFromReflectionType($type),
+				function ( \ReflectionType $type ) : SingularDnfTypeInterface {
+					$reflectionType = self::getFromReflectionType($type);
+					if( !$reflectionType instanceof SingularDnfTypeInterface ) {
+						throw new LogicException('Intersection types must be singular');
+					}
+
+					return $reflectionType;
+				},
 				$type->getTypes()
 			);
 
@@ -49,7 +59,14 @@ class DNF {
 
 		if( $type instanceof \ReflectionUnionType ) {
 			$types = array_map(
-				fn ( \ReflectionType $type ) => self::getFromReflectionType($type),
+				function ( \ReflectionType $type ) : SingularDnfTypeInterface|AndClause {
+					$reflectionType = self::getFromReflectionType($type);
+					if( (!$reflectionType instanceof SingularDnfTypeInterface) && (!$reflectionType instanceof AndClause) ) {
+						throw new LogicException('Intersection types must be singular');
+					}
+
+					return $reflectionType;
+				},
 				$type->getTypes()
 			);
 
@@ -78,7 +95,9 @@ class DNF {
 	/**
 	 * Helper to quickly get a DNF representation of a (ReflectionParameter or ReflectionProperty)'s return type
 	 */
-	public static function getFromVarType( \ReflectionParameter|\ReflectionProperty $parameter ) : ?DnfTypeInterface {
+	public static function getFromVarType(
+		\ReflectionParameter|\ReflectionProperty $parameter
+	) : SingularDnfTypeInterface|NestedDnfTypeInterface|null {
 		$type = $parameter->getType();
 
 		return $type ? self::getFromReflectionType($type) : null;
@@ -88,7 +107,9 @@ class DNF {
 	 * Helper to quickly get a DNF representation of a ReflectionFunctionAbstract (ReflectionFunction /
 	 * ReflectionMethod)'s return type
 	 */
-	public static function getFromReturnType( \ReflectionFunctionAbstract $func ) : ?DnfTypeInterface {
+	public static function getFromReturnType(
+		\ReflectionFunctionAbstract $func
+	) : SingularDnfTypeInterface|NestedDnfTypeInterface|null {
 		$type = $func->getReturnType();
 
 		return $type ? self::getFromReflectionType($type) : null;

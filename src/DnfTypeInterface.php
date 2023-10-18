@@ -16,7 +16,7 @@ interface DnfTypeInterface extends \Countable {
 	 * If the given type matches just "B", this method returns false.
 	 * If the given type matches "B&C", this method returns true.
 	 */
-	public function isSatisfiedBy( DnfTypeInterface $value ) : bool;
+	public function isSatisfiedBy( SingularDnfTypeInterface|NestedDnfTypeInterface $value ) : bool;
 
 	/**
 	 * Returns the number of types in this DNF type
