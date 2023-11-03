@@ -28,7 +28,7 @@ class CallableType implements SingularDnfTypeInterface {
 			return false;
 		}
 
-		if( $value instanceof CallableType ) {
+		if( $value instanceof self ) {
 			return true;
 		}
 

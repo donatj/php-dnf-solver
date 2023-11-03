@@ -114,87 +114,87 @@ class DNFTest extends TestCase {
 		));
 	}
 
-	public function trueSatisfactionProvider() : \Generator {
+	public static function trueSatisfactionProvider() : \Generator {
 		yield [
-			$this->firstParamType(function ( FooAwareInterface $foo ) { }),
-			$this->returnType(function () : FooAwareInterface { }),
+			self::firstParamType(function ( FooAwareInterface $foo ) { }),
+			self::returnType(function () : FooAwareInterface { }),
 		];
 
 		yield [
-			$this->firstParamType(function ( float $foo ) { }),
-			$this->returnType(fn () : float => 8.0),
+			self::firstParamType(function ( float $foo ) { }),
+			self::returnType(fn () : float => 8.0),
 		];
 
 		yield [
-			$this->firstParamType(function ( mixed $foo ) { }),
-			$this->returnType(fn () : float => 8.0),
+			self::firstParamType(function ( mixed $foo ) { }),
+			self::returnType(fn () : float => 8.0),
 		];
 
 		yield [
-			$this->firstParamType(function ( mixed $foo ) { }),
-			$this->returnType(fn () : FooAwareInterface|BazAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
+			self::firstParamType(function ( mixed $foo ) { }),
+			self::returnType(fn () : FooAwareInterface|BazAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
 		];
 
 		yield [
-			$this->firstParamType(function ( FooAwareInterface $foo ) { }),
-			$this->returnType(fn () : FooAwareInterface&BazAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
+			self::firstParamType(function ( FooAwareInterface $foo ) { }),
+			self::returnType(fn () : FooAwareInterface&BazAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
 		];
 
 		yield [
-			$this->firstParamType(function ( FooAwareInterface&BazAwareInterface $foo ) { }),
-			$this->returnType(fn () : BarPerson => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
+			self::firstParamType(function ( FooAwareInterface&BazAwareInterface $foo ) { }),
+			self::returnType(fn () : BarPerson => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
 		];
 
 		yield [
-			$this->firstParamType(function ( callable $foo ) { }),
-			$this->returnType(fn () : InvokablePersonFactory => $this->getMockBuilder(InvokablePersonFactory::class)->getMock()),
+			self::firstParamType(function ( callable $foo ) { }),
+			self::returnType(fn () : InvokablePersonFactory => $this->getMockBuilder(InvokablePersonFactory::class)->getMock()),
 		];
 
 		yield [
-			$this->firstParamType(function ( callable $foo ) { }),
-			$this->returnType(fn () : callable => $this->getMockBuilder(InvokablePersonFactory::class)->getMock()),
+			self::firstParamType(function ( callable $foo ) { }),
+			self::returnType(fn () : callable => $this->getMockBuilder(InvokablePersonFactory::class)->getMock()),
 		];
 	}
 
-	public function falseSatisfactionProvider() : \Generator {
+	public static function falseSatisfactionProvider() : \Generator {
 		yield [
-			$this->firstParamType(function ( PersonInterface $foo ) { }),
-			$this->returnType(fn () : FooAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
+			self::firstParamType(function ( PersonInterface $foo ) { }),
+			self::returnType(fn () : FooAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
 		];
 
 		yield [
-			$this->firstParamType(function ( int $foo ) { }),
-			$this->returnType(fn () : float => 8.0),
+			self::firstParamType(function ( int $foo ) { }),
+			self::returnType(fn () : float => 8.0),
 		];
 
 		yield [
-			$this->firstParamType(function ( float $foo ) { }),
-			$this->returnType(fn () : mixed => 8.0),
+			self::firstParamType(function ( float $foo ) { }),
+			self::returnType(fn () : mixed => 8.0),
 		];
 
 		yield [
-			$this->firstParamType(function ( FooAwareInterface|BazAwareInterface $foo ) { }),
-			$this->returnType(fn () : mixed => 8.0),
+			self::firstParamType(function ( FooAwareInterface|BazAwareInterface $foo ) { }),
+			self::returnType(fn () : mixed => 8.0),
 		];
 
 		yield [
-			$this->firstParamType(function ( FooAwareInterface&BazAwareInterface $foo ) { }),
-			$this->returnType(fn () : FooAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
+			self::firstParamType(function ( FooAwareInterface&BazAwareInterface $foo ) { }),
+			self::returnType(fn () : FooAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
 		];
 
 		yield [
-			$this->firstParamType(function ( InvokablePersonFactory $foo ) { }),
-			$this->returnType(fn () : callable => $this->getMockBuilder(InvokablePersonFactory::class)->getMock()),
+			self::firstParamType(function ( InvokablePersonFactory $foo ) { }),
+			self::returnType(fn () : callable => $this->getMockBuilder(InvokablePersonFactory::class)->getMock()),
 		];
 
 		yield [
-			$this->firstParamType(function ( callable $foo ) { }),
-			$this->returnType(fn () : callable|InvokablePersonFactory => $this->getMockBuilder(InvokablePersonFactory::class)->getMock()),
+			self::firstParamType(function ( callable $foo ) { }),
+			self::returnType(fn () : callable|InvokablePersonFactory => $this->getMockBuilder(InvokablePersonFactory::class)->getMock()),
 		];
 
 		yield [
-			$this->firstParamType(function ( callable $foo ) { }),
-			$this->returnType(fn () : string => "soup"),
+			self::firstParamType(function ( callable $foo ) { }),
+			self::returnType(fn () : string => "soup"),
 		];
 	}
 

@@ -35,7 +35,7 @@ class OrClause implements NestedDnfTypeInterface {
 
 	public function isSatisfiedBy( SingularDnfTypeInterface|NestedDnfTypeInterface $value ) : bool {
 		if( $value instanceof SingularDnfTypeInterface ) {
-			$value = new OrClause($value);
+			$value = new self($value);
 		}
 
 		foreach( $value->getTypes() as $valueType ) {
