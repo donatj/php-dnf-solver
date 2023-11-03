@@ -58,37 +58,37 @@ class DNFTest extends TestCase {
 		));
 	}
 
-	public function trueSatisfactionProvider() : \Generator {
+	public static function trueSatisfactionProvider() : \Generator {
 		yield [
-			$this->firstParamType(function( (FooAwareInterface&BazAwareInterface)|null $foo ) { }),
-			$this->returnType(fn() : BarPerson => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
+			self::firstParamType(function( (FooAwareInterface&BazAwareInterface)|null $foo ) { }),
+			self::returnType(fn() : BarPerson => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
 		];
 
 		yield [
-			$this->firstParamType(function( (FooAwareInterface&BazAwareInterface)|int $foo ) { }),
-			$this->returnType(fn() : int => 10),
+			self::firstParamType(function( (FooAwareInterface&BazAwareInterface)|int $foo ) { }),
+			self::returnType(fn() : int => 10),
 		];
 
 		yield [
-			$this->firstParamType(function( (FooAwareInterface&InvokablePersonFactory)|callable $foo ) { }),
-			$this->returnType(fn() : callable => fn() => 10),
+			self::firstParamType(function( (FooAwareInterface&InvokablePersonFactory)|callable $foo ) { }),
+			self::returnType(fn() : callable => fn() => 10),
 		];
 	}
 
-	public function falseSatisfactionProvider() : \Generator {
+	public static function falseSatisfactionProvider() : \Generator {
 		yield [
-			$this->firstParamType(function( (FooAwareInterface&BazAwareInterface)|null $foo ) { }),
-			$this->returnType(fn() : FooAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
+			self::firstParamType(function( (FooAwareInterface&BazAwareInterface)|null $foo ) { }),
+			self::returnType(fn() : FooAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
 		];
 
 		yield [
-			$this->firstParamType(function( (FooAwareInterface&BazAwareInterface)|null $foo ) { }),
-			$this->returnType(fn() : ?FooAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
+			self::firstParamType(function( (FooAwareInterface&BazAwareInterface)|null $foo ) { }),
+			self::returnType(fn() : ?FooAwareInterface => $this->getMockBuilder(FooAwareInterface::class)->getMock()),
 		];
 
 		yield [
-			$this->firstParamType(function( callable $foo ) { }),
-			$this->returnType(fn() : (FooAwareInterface&InvokablePersonFactory)|callable => fn() => 10),
+			self::firstParamType(function( callable $foo ) { }),
+			self::returnType(fn() : (FooAwareInterface&InvokablePersonFactory)|callable => fn() => 10),
 		];
 	}
 
