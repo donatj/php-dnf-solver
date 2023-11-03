@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/donatj/php-dnf-solver/version)](https://packagist.org/packages/donatj/php-dnf-solver)
 [![License](https://poser.pugx.org/donatj/php-dnf-solver/license)](https://packagist.org/packages/donatj/php-dnf-solver)
 [![ci.yml](https://github.com/donatj/php-dnf-solver/actions/workflows/ci.yml/badge.svg?)](https://github.com/donatj/php-dnf-solver/actions/workflows/ci.yml)
-[![Build Status](https://coveralls.io/repos/github/donatj/php-dnf-solver/badge.svg)](https://coveralls.io/github/donatj/php-dnf-solver)
+[![Coverage Status](https://coveralls.io/repos/github/donatj/php-dnf-solver/badge.svg)](https://coveralls.io/github/donatj/php-dnf-solver)
 
 
 PHP DNF (Disjunctive Normal Form) Signature Compatibility Solver - see: https://wiki.php.net/rfc/dnf_types
