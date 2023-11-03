@@ -13,7 +13,7 @@
 		"php": "^8.1.0 || ^8.2.0"
 	},
 	"require-dev": {
-		"corpus/coding-standard": "^0.8.0",
+		"corpus/coding-standard": "~0.8.0",
 		"donatj/drop": "^1.1",
 		"donatj/mddoc": "^0.8.0",
 		"friendsofphp/php-cs-fixer": "^3.16",
