@@ -10,7 +10,7 @@
 		"solver"
 	],
 	"require": {
-		"php": "^8.1.0 || ^8.2.0"
+		"php": "^8.1.0 || ^8.2.0  || ^8.3.0"
 	},
 	"require-dev": {
 		"corpus/coding-standard": "~0.8.0",
