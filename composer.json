@@ -15,7 +15,7 @@
 	"require-dev": {
 		"corpus/coding-standard": "~0.8.0",
 		"donatj/drop": "^1.1",
-		"donatj/mddoc": "^0.8.0",
+		"donatj/mddoc": "^0.8.0 || ^0.10.0",
 		"friendsofphp/php-cs-fixer": "^3.16",
 		"phpstan/phpstan": "^1.10",
 		"phpunit/phpunit": "^10",
