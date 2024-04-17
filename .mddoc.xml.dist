@@ -1,5 +1,8 @@
 <mddoc>
-	<docpage target="README.md" autoloader="psr4" autoloader-root="src" autoloader-root-namespace="donatj\PhpDnfSolver">
+	<docpage target="README.md">
+
+		<autoloader namespace="donatj\PhpDnfSolver" type="psr4" root="src" />
+
 		<section title="PHP DNF Solver">
 			<badge-poser type="version"/>
 			<badge-poser type="license"/>
