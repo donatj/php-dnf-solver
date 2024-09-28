@@ -7,7 +7,7 @@ use donatj\PhpDnfSolver\NestedDnfTypeInterface;
 use donatj\PhpDnfSolver\SingularDnfTypeInterface;
 
 /**
- * Represents a "and clause" - a set of types which must all be satisfied - e.g. "A&B&C"
+ * Represents an "and clause" - a set of types which must all be satisfied - e.g. "A&B&C"
  */
 class AndClause implements NestedDnfTypeInterface {
 

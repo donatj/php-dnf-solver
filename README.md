@@ -183,7 +183,7 @@ ReflectionMethod)'s return type
 
 ### Class: \donatj\PhpDnfSolver\Types\AndClause
 
-Represents a "and clause" - a set of types which must all be satisfied - e.g. "A&B&C"
+Represents an "and clause" - a set of types which must all be satisfied - e.g. "A&B&C"
 
 #### Method: AndClause->__construct
 
