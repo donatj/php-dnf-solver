@@ -10,7 +10,7 @@ PHP DNF (Disjunctive Normal Form) Signature Compatibility Solver - see: https://
 
 ## Requirements
 
-- **php**: ^8.1.0 || ^8.2.0 || ^8.3.0
+- **php**: ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0
 
 ## Installing
 
@@ -124,7 +124,7 @@ string(52) "(Examples\A&Examples\B)|(Examples\B&Examples\C)|null"
 
 ## Documentation
 
-### Class: \donatj\PhpDnfSolver\DNF
+### Class: donatj\PhpDnfSolver\DNF
 
 #### Method: DNF::getFromReflectionType
 
@@ -177,11 +177,11 @@ function getFromReturnType(\ReflectionFunctionAbstract $func) : \donatj\PhpDnfSo
 Helper to quickly get a DNF representation of a ReflectionFunctionAbstract (ReflectionFunction /  
 ReflectionMethod)'s return type
 
-### Class: \donatj\PhpDnfSolver\Exceptions\InvalidArgumentException
+### Class: donatj\PhpDnfSolver\Exceptions\InvalidArgumentException
 
-### Class: \donatj\PhpDnfSolver\Exceptions\LogicException
+### Class: donatj\PhpDnfSolver\Exceptions\LogicException
 
-### Class: \donatj\PhpDnfSolver\Types\AndClause
+### Class: donatj\PhpDnfSolver\Types\AndClause
 
 Represents an "and clause" - a set of types which must all be satisfied - e.g. "A&B&C"
 
@@ -241,7 +241,7 @@ function getTypes() : array
 
 - ***\donatj\PhpDnfSolver\SingularDnfTypeInterface[]***
 
-### Class: \donatj\PhpDnfSolver\Types\BuiltInType
+### Class: donatj\PhpDnfSolver\Types\BuiltInType
 
 Represents a "built in type" as defined by ReflectionNamedType::isBuiltin()
 
@@ -309,7 +309,7 @@ Always 1 for singular types
 
 Returns the number of types in this DNF type
 
-### Class: \donatj\PhpDnfSolver\Types\CallableType
+### Class: donatj\PhpDnfSolver\Types\CallableType
 
 Represents a "callable" type
 
@@ -362,7 +362,7 @@ Always 1 for singular types
 
 Returns the number of types in this DNF type
 
-### Class: \donatj\PhpDnfSolver\Types\OrClause
+### Class: donatj\PhpDnfSolver\Types\OrClause
 
 Represents a "or" clause - a set of types where any one of them must be satisfied - e.g. "A|B|(C&D)"
 
@@ -422,7 +422,7 @@ function getTypes() : array
 
 - ***\donatj\PhpDnfSolver\Types\AndClause[]***
 
-### Class: \donatj\PhpDnfSolver\Types\UserDefinedType
+### Class: donatj\PhpDnfSolver\Types\UserDefinedType
 
 Represents a "user defined type" - a class, interface, or trait, etc.
 
