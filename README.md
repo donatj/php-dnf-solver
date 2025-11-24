@@ -10,7 +10,7 @@ PHP DNF (Disjunctive Normal Form) Signature Compatibility Solver - see: https://
 
 ## Requirements
 
-- **php**: ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0
+- **php**: ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0
 
 ## Installing
 
