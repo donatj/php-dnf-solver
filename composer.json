@@ -16,7 +16,7 @@
 		"corpus/coding-standard": "~0.10.0",
 		"donatj/drop": "^1.1",
 		"donatj/mddoc": "^0.10.0",
-		"friendsofphp/php-cs-fixer": "^3.75",
+		"friendsofphp/php-cs-fixer": "^3.95",
 		"phpstan/phpstan": "^2.0",
 		"phpunit/phpunit": "^10",
 		"slevomat/coding-standard": "^8.11",
