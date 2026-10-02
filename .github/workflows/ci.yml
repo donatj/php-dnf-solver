@@ -29,6 +29,7 @@ jobs:
         run: composer install
 
       - name: Verify documentation
+        if: matrix.php-versions != '8.1'
         run: ./vendor/bin/mddoc --dry-run=true
 
       - name: Run tests
