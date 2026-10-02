@@ -129,7 +129,7 @@ string(52) "(Examples\A&Examples\B)|(Examples\B&Examples\C)|null"
 #### Method: DNF::getFromReflectionType
 
 ```php
-function getFromReflectionType(\ReflectionType $type) : \donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface
+function getFromReflectionType(\ReflectionType $type): \donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface
 ```
 
 Helper to convert a ReflectionType into it's DNF representation  
@@ -146,12 +146,12 @@ Helper to convert a ReflectionType into it's DNF representation
 #### Method: DNF::reflectionTypeSatisfiesReflectionType
 
 ```php
-function reflectionTypeSatisfiesReflectionType(\ReflectionType $satisfyingType, \ReflectionType $satisfiedType) : bool
+function reflectionTypeSatisfiesReflectionType(\ReflectionType $satisfyingType, \ReflectionType $satisfiedType): bool
 ```
 
 Helper to quickly check if a ReflectionType satisfies another ReflectionType
 
-##### Parameters:
+##### Parameters
 
 - ***\ReflectionType*** `$satisfyingType` - The type which must be satisfied (e.g. a parameter type)
 - ***\ReflectionType*** `$satisfiedType` - The type which must satisfy the other (e.g. a return type)
@@ -161,7 +161,7 @@ Helper to quickly check if a ReflectionType satisfies another ReflectionType
 #### Method: DNF::getFromVarType
 
 ```php
-function getFromVarType(\ReflectionParameter|\ReflectionProperty $parameter) : \donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface|null
+function getFromVarType(\ReflectionParameter|\ReflectionProperty $parameter): \donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface|null
 ```
 
 Helper to quickly get a DNF representation of a (ReflectionParameter or ReflectionProperty)'s return type
@@ -171,7 +171,7 @@ Helper to quickly get a DNF representation of a (ReflectionParameter or Reflecti
 #### Method: DNF::getFromReturnType
 
 ```php
-function getFromReturnType(\ReflectionFunctionAbstract $func) : \donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface|null
+function getFromReturnType(\ReflectionFunctionAbstract $func): \donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface|null
 ```
 
 Helper to quickly get a DNF representation of a ReflectionFunctionAbstract (ReflectionFunction /  
@@ -191,7 +191,7 @@ Represents an "and clause" - a set of types which must all be satisfied - e.g. "
 function __construct(\donatj\PhpDnfSolver\SingularDnfTypeInterface ...$types)
 ```
 
-##### Parameters:
+##### Parameters
 
 - ***\donatj\PhpDnfSolver\SingularDnfTypeInterface*** `$types` - The list of types to be satisfied
 
@@ -200,7 +200,7 @@ function __construct(\donatj\PhpDnfSolver\SingularDnfTypeInterface ...$types)
 #### Method: AndClause->dnf
 
 ```php
-function dnf() : string
+function dnf(): string
 ```
 
 Return the canonical string representation of the DNF representation of this type
@@ -210,7 +210,7 @@ Return the canonical string representation of the DNF representation of this typ
 #### Method: AndClause->isSatisfiedBy
 
 ```php
-function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value) : bool
+function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value): bool
 ```
 
 Tests if this type is satisfied by the given type  
@@ -224,7 +224,7 @@ If the given type matches "B&C", this method returns true.
 #### Method: AndClause->count
 
 ```php
-function count() : int
+function count(): int
 ```
 
 Returns the number of types in this DNF type
@@ -234,10 +234,10 @@ Returns the number of types in this DNF type
 #### Method: AndClause->getTypes
 
 ```php
-function getTypes() : array
+function getTypes(): array
 ```
 
-##### Returns:
+##### Return Value
 
 - ***\donatj\PhpDnfSolver\SingularDnfTypeInterface[]***
 
@@ -259,7 +259,7 @@ This includes:
 function __construct(string $name)
 ```
 
-##### Parameters:
+##### Parameters
 
 - ***string*** `$name` - The name of the built-in type
 
@@ -268,7 +268,7 @@ function __construct(string $name)
 #### Method: BuiltInType->dnf
 
 ```php
-function dnf() : string
+function dnf(): string
 ```
 
 Return the canonical string representation of the DNF representation of this type
@@ -278,7 +278,7 @@ Return the canonical string representation of the DNF representation of this typ
 #### Method: BuiltInType->getTypeName
 
 ```php
-function getTypeName() : string
+function getTypeName(): string
 ```
 
 Returns the fully qualified type name of this type
@@ -288,7 +288,7 @@ Returns the fully qualified type name of this type
 #### Method: BuiltInType->isSatisfiedBy
 
 ```php
-function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value) : bool
+function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value): bool
 ```
 
 Tests if this type is satisfied by the given type  
@@ -302,7 +302,7 @@ If the given type matches "B&C", this method returns true.
 #### Method: BuiltInType->count
 
 ```php
-function count() : int
+function count(): int
 ```
 
 Always 1 for singular types
@@ -321,7 +321,7 @@ This includes:
 #### Method: CallableType->dnf
 
 ```php
-function dnf() : string
+function dnf(): string
 ```
 
 Return the canonical string representation of the DNF representation of this type
@@ -331,7 +331,7 @@ Return the canonical string representation of the DNF representation of this typ
 #### Method: CallableType->isSatisfiedBy
 
 ```php
-function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value) : bool
+function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value): bool
 ```
 
 Tests if this type is satisfied by the given type  
@@ -345,7 +345,7 @@ If the given type matches "B&C", this method returns true.
 #### Method: CallableType->getTypeName
 
 ```php
-function getTypeName() : string
+function getTypeName(): string
 ```
 
 Returns the fully qualified type name of this type
@@ -355,7 +355,7 @@ Returns the fully qualified type name of this type
 #### Method: CallableType->count
 
 ```php
-function count() : int
+function count(): int
 ```
 
 Always 1 for singular types
@@ -372,7 +372,7 @@ Represents a "or" clause - a set of types where any one of them must be satisfie
 function __construct(\donatj\PhpDnfSolver\Types\AndClause|\donatj\PhpDnfSolver\SingularDnfTypeInterface ...$types)
 ```
 
-##### Parameters:
+##### Parameters
 
 - ***\donatj\PhpDnfSolver\Types\AndClause*** | ***\donatj\PhpDnfSolver\SingularDnfTypeInterface*** `$types` - The list of types to be satisfied. Does not accept an OrClause as DNF defines that as invalid.
 
@@ -381,7 +381,7 @@ function __construct(\donatj\PhpDnfSolver\Types\AndClause|\donatj\PhpDnfSolver\S
 #### Method: OrClause->dnf
 
 ```php
-function dnf() : string
+function dnf(): string
 ```
 
 Return the canonical string representation of the DNF representation of this type
@@ -391,7 +391,7 @@ Return the canonical string representation of the DNF representation of this typ
 #### Method: OrClause->isSatisfiedBy
 
 ```php
-function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value) : bool
+function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value): bool
 ```
 
 Tests if this type is satisfied by the given type  
@@ -405,7 +405,7 @@ If the given type matches "B&C", this method returns true.
 #### Method: OrClause->count
 
 ```php
-function count() : int
+function count(): int
 ```
 
 Returns the number of types in this DNF type
@@ -415,10 +415,10 @@ Returns the number of types in this DNF type
 #### Method: OrClause->getTypes
 
 ```php
-function getTypes() : array
+function getTypes(): array
 ```
 
-##### Returns:
+##### Return Value
 
 - ***\donatj\PhpDnfSolver\Types\AndClause[]***
 
@@ -441,7 +441,7 @@ class UserDefinedType {
 function __construct(string $className)
 ```
 
-##### Parameters:
+##### Parameters
 
 - ***class-string*** `$className` - The name of the class, interface, or trait to be satisfied
 
@@ -452,7 +452,7 @@ function __construct(string $className)
 #### Method: UserDefinedType->dnf
 
 ```php
-function dnf() : string
+function dnf(): string
 ```
 
 Return the canonical string representation of the DNF representation of this type
@@ -462,12 +462,12 @@ Return the canonical string representation of the DNF representation of this typ
 #### Method: UserDefinedType->getTypeName
 
 ```php
-function getTypeName() : string
+function getTypeName(): string
 ```
 
 Returns the fully qualified type name of this type
 
-##### Returns:
+##### Return Value
 
 - ***class-string***
 
@@ -476,7 +476,7 @@ Returns the fully qualified type name of this type
 #### Method: UserDefinedType->isSatisfiedBy
 
 ```php
-function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value) : bool
+function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value): bool
 ```
 
 Tests if this type is satisfied by the given type  
@@ -490,7 +490,7 @@ If the given type matches "B&C", this method returns true.
 #### Method: UserDefinedType->count
 
 ```php
-function count() : int
+function count(): int
 ```
 
 Always 1 for singular types
