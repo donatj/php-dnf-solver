@@ -129,7 +129,9 @@ string(52) "(Examples\A&Examples\B)|(Examples\B&Examples\C)|null"
 #### Method: DNF::getFromReflectionType
 
 ```php
-function getFromReflectionType(\ReflectionType $type): \donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface
+function getFromReflectionType(
+	\ReflectionType $type,
+): \donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface
 ```
 
 Helper to convert a ReflectionType into it's DNF representation  
@@ -146,7 +148,10 @@ Helper to convert a ReflectionType into it's DNF representation
 #### Method: DNF::reflectionTypeSatisfiesReflectionType
 
 ```php
-function reflectionTypeSatisfiesReflectionType(\ReflectionType $satisfyingType, \ReflectionType $satisfiedType): bool
+function reflectionTypeSatisfiesReflectionType(
+	\ReflectionType $satisfyingType,
+	\ReflectionType $satisfiedType,
+): bool
 ```
 
 Helper to quickly check if a ReflectionType satisfies another ReflectionType
@@ -161,7 +166,9 @@ Helper to quickly check if a ReflectionType satisfies another ReflectionType
 #### Method: DNF::getFromVarType
 
 ```php
-function getFromVarType(\ReflectionParameter|\ReflectionProperty $parameter): \donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface|null
+function getFromVarType(
+	\ReflectionParameter|\ReflectionProperty $parameter,
+): \donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface|null
 ```
 
 Helper to quickly get a DNF representation of a (ReflectionParameter or ReflectionProperty)'s return type
@@ -171,7 +178,9 @@ Helper to quickly get a DNF representation of a (ReflectionParameter or Reflecti
 #### Method: DNF::getFromReturnType
 
 ```php
-function getFromReturnType(\ReflectionFunctionAbstract $func): \donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface|null
+function getFromReturnType(
+	\ReflectionFunctionAbstract $func,
+): \donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface|null
 ```
 
 Helper to quickly get a DNF representation of a ReflectionFunctionAbstract (ReflectionFunction /  
@@ -210,7 +219,9 @@ Return the canonical string representation of the DNF representation of this typ
 #### Method: AndClause->isSatisfiedBy
 
 ```php
-function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value): bool
+function isSatisfiedBy(
+	\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value,
+): bool
 ```
 
 Tests if this type is satisfied by the given type  
@@ -288,7 +299,9 @@ Returns the fully qualified type name of this type
 #### Method: BuiltInType->isSatisfiedBy
 
 ```php
-function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value): bool
+function isSatisfiedBy(
+	\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value,
+): bool
 ```
 
 Tests if this type is satisfied by the given type  
@@ -331,7 +344,9 @@ Return the canonical string representation of the DNF representation of this typ
 #### Method: CallableType->isSatisfiedBy
 
 ```php
-function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value): bool
+function isSatisfiedBy(
+	\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value,
+): bool
 ```
 
 Tests if this type is satisfied by the given type  
@@ -369,7 +384,9 @@ Represents a "or" clause - a set of types where any one of them must be satisfie
 #### Method: OrClause->__construct
 
 ```php
-function __construct(\donatj\PhpDnfSolver\Types\AndClause|\donatj\PhpDnfSolver\SingularDnfTypeInterface ...$types)
+function __construct(
+	\donatj\PhpDnfSolver\Types\AndClause|\donatj\PhpDnfSolver\SingularDnfTypeInterface ...$types,
+)
 ```
 
 ##### Parameters
@@ -391,7 +408,9 @@ Return the canonical string representation of the DNF representation of this typ
 #### Method: OrClause->isSatisfiedBy
 
 ```php
-function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value): bool
+function isSatisfiedBy(
+	\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value,
+): bool
 ```
 
 Tests if this type is satisfied by the given type  
@@ -476,7 +495,9 @@ Returns the fully qualified type name of this type
 #### Method: UserDefinedType->isSatisfiedBy
 
 ```php
-function isSatisfiedBy(\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value): bool
+function isSatisfiedBy(
+	\donatj\PhpDnfSolver\SingularDnfTypeInterface|\donatj\PhpDnfSolver\NestedDnfTypeInterface $value,
+): bool
 ```
 
 Tests if this type is satisfied by the given type  
